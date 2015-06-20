@@ -1,6 +1,6 @@
 package com.hatshop.controllers
 
-import com.hatshop.RESTController
+import com.hatshop.AbstractRestController
 import com.hatshop.models.Category
 import com.hatshop.repositories.CustomerRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("categories")
-class CategoryController extends RESTController<Category, Integer> {
+class CategoryController extends AbstractRestController<Category, Integer> {
     @Autowired
     CategoryController(CustomerRepository repo) {
         super(repo)

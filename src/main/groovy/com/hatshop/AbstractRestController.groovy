@@ -9,14 +9,14 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.web.bind.annotation.*
 
-public abstract class RESTController<T, ID extends Serializable> {
+public abstract class AbstractRestController<T, ID extends Serializable> {
 
-    private Logger logger = LoggerFactory.getLogger(RESTController.class);
+    private Logger logger = LoggerFactory.getLogger(AbstractRestController.class);
 
     private JpaRepository<T, ID> repo;
 
 
-    public RESTController(JpaRepository<T, ID> repo) {
+    public AbstractRestController(JpaRepository<T, ID> repo) {
         this.repo = repo
     }
 

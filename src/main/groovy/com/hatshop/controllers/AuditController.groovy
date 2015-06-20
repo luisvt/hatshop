@@ -1,6 +1,6 @@
 package com.hatshop.controllers
 
-import com.hatshop.RESTController
+import com.hatshop.AbstractRestController
 import com.hatshop.models.Audit
 import com.hatshop.repositories.AuditRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("audits")
-class AuditController extends RESTController<Audit, Integer> {
+class AuditController extends AbstractRestController<Audit, Integer> {
     @Autowired
     AuditController(AuditRepository repo) {
         super(repo)

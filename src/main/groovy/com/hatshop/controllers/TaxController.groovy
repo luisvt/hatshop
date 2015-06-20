@@ -1,6 +1,6 @@
 package com.hatshop.controllers
 
-import com.hatshop.RESTController
+import com.hatshop.AbstractRestController
 import com.hatshop.models.Customer
 import com.hatshop.repositories.TaxRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("taxes")
-class TaxController extends RESTController<Customer, Integer> {
+class TaxController extends AbstractRestController<Customer, Integer> {
     @Autowired
     TaxController(TaxRepository repo) {
         super(repo)

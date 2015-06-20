@@ -1,6 +1,6 @@
 package com.hatshop.controllers
 
-import com.hatshop.RESTController
+import com.hatshop.AbstractRestController
 import com.hatshop.models.EOrder
 import com.hatshop.repositories.EOrderRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("orders")
-class EOrderController extends RESTController<EOrder, Integer> {
+class EOrderController extends AbstractRestController<EOrder, Integer> {
     @Autowired
     EOrderController(EOrderRepository repo) {
         super(repo)

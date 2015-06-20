@@ -1,6 +1,6 @@
 package com.hatshop.controllers
 
-import com.hatshop.RESTController
+import com.hatshop.AbstractRestController
 import com.hatshop.models.Review
 import com.hatshop.repositories.ReviewRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("reviews")
-class ReviewController extends RESTController<Review, Integer> {
+class ReviewController extends AbstractRestController<Review, Integer> {
     @Autowired
     ReviewController(ReviewRepository repo) {
         super(repo)

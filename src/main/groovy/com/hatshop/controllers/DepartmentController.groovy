@@ -1,6 +1,6 @@
 package com.hatshop.controllers
 
-import com.hatshop.RESTController
+import com.hatshop.AbstractRestController
 import com.hatshop.models.Department
 import com.hatshop.repositories.DepartmentRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("departments")
-class DepartmentController extends RESTController<Department, Integer> {
+class DepartmentController extends AbstractRestController<Department, Integer> {
     @Autowired
     DepartmentController(DepartmentRepository repo) {
         super(repo)
