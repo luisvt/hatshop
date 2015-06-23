@@ -34,8 +34,8 @@ public class Product implements Serializable {
     @Column(name = "display", nullable = false)
     short display
 
-    @Column(name = "search_vector")
-    Serializable searchVector
+//    @Column(name = "search_vector")
+//    Serializable searchVector
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     Set<Review> reviews = new HashSet<Review>(0)

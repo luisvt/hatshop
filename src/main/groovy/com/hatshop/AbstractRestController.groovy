@@ -1,7 +1,5 @@
 package com.hatshop
 
-import com.google.common.base.Throwables
-import com.google.common.collect.Lists
 import org.apache.commons.beanutils.BeanUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -26,10 +24,9 @@ public abstract class AbstractRestController<T, ID extends Serializable> {
     }
 
     @RequestMapping
-    public List<T> findAll(@RequestParam(defaultValue = "0") Integer page,
+    public Iterable<T> findAll(@RequestParam(defaultValue = "0") Integer page,
                            @RequestParam(defaultValue = "20") Integer size) {
-        Iterable<T> all = repo.findAll(new PageRequest(page, size));
-        return Lists.newArrayList(all);
+        repo.findAll(new PageRequest(page, size))
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -51,7 +48,7 @@ public abstract class AbstractRestController<T, ID extends Serializable> {
         }
         catch (Exception e) {
             logger.warn("while copying properties", e);
-            throw Throwables.propagate(e);
+//            throw Throwables.propagate(e);
         }
 
         logger.debug("merged entity: {}", entity);
