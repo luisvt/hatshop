@@ -23,7 +23,7 @@ public class Customer implements java.io.Serializable {
     @Column(name = "id", unique = true, nullable = false)
     int id
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipping_region_id", nullable = false)
     ShippingRegion shippingRegion
 

@@ -9,8 +9,11 @@ import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module
  */
 class CustomObjectMapper extends ObjectMapper{
     public CustomObjectMapper() {
-        registerModule(new Hibernate4Module());
+        def hibernateModule = new Hibernate4Module();
+        hibernateModule.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true)
 
-        configure(SerializationFeature.INDENT_OUTPUT, true);
+        registerModule(hibernateModule);
+
+        configure(SerializationFeature.INDENT_OUTPUT, true)
     }
 }

@@ -1,5 +1,4 @@
-﻿-- TODO: Remove next line. Not sure why it doesn't work without that line.
-;
+﻿; -- TODO: Remove this line. Not sure why it doesn't work without this line.
 --------------------------------------------------------------------------------
 
 -- Populate tables
