@@ -1,4 +1,5 @@
-﻿select;
+﻿-- TODO: Remove next line. Not sure why it doesn't work without that line.
+;
 --------------------------------------------------------------------------------
 
 -- Populate tables
@@ -120,53 +121,53 @@ INSERT INTO product (id, name, description, price, discounted_price, image, thum
        VALUES (45, 'Tarbucket Helmet Military Hat', 'This is a reproduction Tarbucket type hat. This style was a popular military style in the early to mid 1800s. The style is similar to a shako hat, with the main difference being that the crown flairs outward.', '299.99', '0.00', 'TarbucketHelmetMilitaryHat.jpg', 'TarbucketHelmetMilitaryHat.thumb.jpg', 0);
 
 -- Populate product_category table
-INSERT INTO product_category VALUES (1, 1);
-INSERT INTO product_category VALUES (2, 1);
-INSERT INTO product_category VALUES (3, 1);
-INSERT INTO product_category VALUES (4, 1);
-INSERT INTO product_category VALUES (5, 1);
-INSERT INTO product_category VALUES (6, 1);
-INSERT INTO product_category VALUES (7, 1);
-INSERT INTO product_category VALUES (8, 2);
-INSERT INTO product_category VALUES (9, 2);
-INSERT INTO product_category VALUES (10, 2);
-INSERT INTO product_category VALUES (11, 2);
-INSERT INTO product_category VALUES (12, 2);
-INSERT INTO product_category VALUES (13, 2);
-INSERT INTO product_category VALUES (14, 2);
-INSERT INTO product_category VALUES (15, 2);
-INSERT INTO product_category VALUES (16, 3);
-INSERT INTO product_category VALUES (17, 3);
-INSERT INTO product_category VALUES (18, 3);
-INSERT INTO product_category VALUES (19, 3);
-INSERT INTO product_category VALUES (20, 3);
-INSERT INTO product_category VALUES (21, 3);
-INSERT INTO product_category VALUES (22, 3);
-INSERT INTO product_category VALUES (23, 4);
-INSERT INTO product_category VALUES (24, 4);
-INSERT INTO product_category VALUES (25, 4);
-INSERT INTO product_category VALUES (26, 4);
-INSERT INTO product_category VALUES (8, 5);
-INSERT INTO product_category VALUES (27, 5);
-INSERT INTO product_category VALUES (28, 5);
-INSERT INTO product_category VALUES (29, 5);
-INSERT INTO product_category VALUES (30, 6);
-INSERT INTO product_category VALUES (31, 6);
-INSERT INTO product_category VALUES (32, 6);
-INSERT INTO product_category VALUES (33, 6);
-INSERT INTO product_category VALUES (34, 6);
-INSERT INTO product_category VALUES (35, 6);
-INSERT INTO product_category VALUES (26, 7);
-INSERT INTO product_category VALUES (36, 7);
-INSERT INTO product_category VALUES (37, 7);
-INSERT INTO product_category VALUES (38, 7);
-INSERT INTO product_category VALUES (39, 7);
-INSERT INTO product_category VALUES (40, 7);
-INSERT INTO product_category VALUES (41, 7);
-INSERT INTO product_category VALUES (42, 7);
-INSERT INTO product_category VALUES (43, 7);
-INSERT INTO product_category VALUES (44, 7);
-INSERT INTO product_category VALUES (45, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (1, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (2, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (3, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (4, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (5, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (6, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (7, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (8, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (9, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (10, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (11, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (12, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (13, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (14, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (15, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (16, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (17, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (18, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (19, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (20, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (21, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (22, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (23, 4);
+INSERT INTO product_category (product_id, category_id) VALUES (24, 4);
+INSERT INTO product_category (product_id, category_id) VALUES (25, 4);
+INSERT INTO product_category (product_id, category_id) VALUES (26, 4);
+INSERT INTO product_category (product_id, category_id) VALUES (8, 5);
+INSERT INTO product_category (product_id, category_id) VALUES (27, 5);
+INSERT INTO product_category (product_id, category_id) VALUES (28, 5);
+INSERT INTO product_category (product_id, category_id) VALUES (29, 5);
+INSERT INTO product_category (product_id, category_id) VALUES (30, 6);
+INSERT INTO product_category (product_id, category_id) VALUES (31, 6);
+INSERT INTO product_category (product_id, category_id) VALUES (32, 6);
+INSERT INTO product_category (product_id, category_id) VALUES (33, 6);
+INSERT INTO product_category (product_id, category_id) VALUES (34, 6);
+INSERT INTO product_category (product_id, category_id) VALUES (35, 6);
+INSERT INTO product_category (product_id, category_id) VALUES (26, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (36, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (37, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (38, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (39, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (40, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (41, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (42, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (43, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (44, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (45, 7);
 
 -- Populate shipping_region table
 INSERT INTO shipping_region (id, shipping_region)

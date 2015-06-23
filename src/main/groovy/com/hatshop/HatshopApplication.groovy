@@ -12,10 +12,15 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
+import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.support.EncodedResource
 import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import org.springframework.jdbc.datasource.init.ScriptUtils
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+
+import javax.sql.DataSource
 
 @SpringBootApplication
 class HatshopApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
@@ -27,6 +32,8 @@ class HatshopApplication extends WebMvcConfigurerAdapter implements CommandLineR
     @Autowired UserRepository userRepository
     @Autowired CustomerRepository customerRepository
     @Autowired ShippingRegionRepository shippingRegionRepository
+
+    @Autowired DataSource dataSource
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -44,12 +51,13 @@ class HatshopApplication extends WebMvcConfigurerAdapter implements CommandLineR
         def roleUser = new Role(authority: "ROLE_USER"),
             encoder = new BCryptPasswordEncoder()
 
-        def users = userRepository.save([
+        userRepository.save([
                 new User("user1", encoder.encode("password1"), [roleUser]),
                 new User("user2", encoder.encode("password2"), [roleUser])
         ])
 
-        println(users*.username)
+        def resource = new EncodedResource(new ClassPathResource("_data.sql"))
+        ScriptUtils.executeSqlScript(dataSource.connection, resource, true, true, '--', ';', '/*', '/*')
 
         def shippingRegion = new ShippingRegion(1, 'region1')
         shippingRegionRepository.save(shippingRegion)
