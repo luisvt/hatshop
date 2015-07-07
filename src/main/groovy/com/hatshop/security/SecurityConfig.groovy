@@ -63,9 +63,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         if(environment.acceptsProfiles('default'))
             http.authorizeRequests().antMatchers('/**').permitAll()
-                .and().httpBasic()
-                .and().csrf().csrfTokenRepository(csrfTokenRepository())
-                .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+                .and().csrf().disable()
     }
 
     private Filter csrfHeaderFilter() {
