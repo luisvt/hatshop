@@ -14,7 +14,7 @@ import java.security.Principal
  * Created by luis on 6/20/15.
  */
 @RestController
-class UserController {
+class SessionUserController {
     @Autowired Environment environment
     @Autowired UserRepository userRepository
 

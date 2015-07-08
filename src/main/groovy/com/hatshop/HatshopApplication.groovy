@@ -37,12 +37,7 @@ class HatshopApplication extends WebMvcConfigurerAdapter implements CommandLineR
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(jsonHttpMessageConverter());
-    }
-
-    @Bean
-    MappingJackson2HttpMessageConverter jsonHttpMessageConverter() {
-        return new MappingJackson2HttpMessageConverter(new CustomObjectMapper());
+        converters.add(new MappingJackson2HttpMessageConverter(new CustomObjectMapper()));
     }
 
     @Override
