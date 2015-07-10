@@ -7,10 +7,10 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "department", schema = "public")
-public class Department implements java.io.Serializable {
+public class Department {
     @Id
     @Column(name = "id", unique = true, nullable = false)
-    int id
+    Integer id
 
     @Column(name = "name", nullable = false, length = 50)
     String name
