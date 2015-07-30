@@ -1,5 +1,8 @@
 package com.hatshop.models
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
+
 import javax.persistence.*;
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 /**
@@ -7,7 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "category", schema = "public")
-public class Category implements java.io.Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator)
+public class Category {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)

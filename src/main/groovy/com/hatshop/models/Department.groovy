@@ -1,5 +1,8 @@
 package com.hatshop.models
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
+
 import javax.persistence.*
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 /**
@@ -7,6 +10,9 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "department", schema = "public")
+@NamedEntityGraph(name = "Department.categories",
+    attributeNodes = @NamedAttributeNode("categories"))
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator)
 public class Department {
     @Id
     @Column(name = "id", unique = true, nullable = false)
