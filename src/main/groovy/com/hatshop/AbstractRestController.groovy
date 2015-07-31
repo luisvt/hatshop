@@ -7,6 +7,9 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.web.bind.annotation.*
 
+import static com.hatshop.Constants.PAGE_NUMBER
+import static com.hatshop.Constants.PAGE_SIZE
+
 public abstract class AbstractRestController<T, ID extends Serializable> {
 
     private Logger logger = LoggerFactory.getLogger(AbstractRestController.class);
@@ -24,8 +27,8 @@ public abstract class AbstractRestController<T, ID extends Serializable> {
     }
 
     @RequestMapping
-    public Iterable<T> findAll(@RequestParam(defaultValue = "0") Integer page,
-                           @RequestParam(defaultValue = "20") Integer size) {
+    public Iterable<T> findAll(@RequestParam(defaultValue = PAGE_NUMBER) Integer page,
+                           @RequestParam(defaultValue = PAGE_SIZE) Integer size) {
         repo.findAll(new PageRequest(page, size))
     }
 
