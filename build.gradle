@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 //        classpath 'org.springframework:springloaded:1.2.1.RELEASE'
-        classpath("io.spring.gradle:dependency-management-plugin:0.4.1.RELEASE")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
     }
 }
 
@@ -46,7 +46,7 @@ dependencies {
     runtime 'org.postgresql:postgresql:9.3-1103-jdbc41'
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
-    testCompile 'com.jayway.restassured:rest-assured:2.4.1'
+    testCompile 'com.jayway.jsonpath:json-path:2.0.0'
 
     reverseMap 'org.hibernate:hibernate-tools:4.3.1.CR1'
     reverseMap 'org.hibernate:hibernate-entitymanager:4.3.7.Final'
