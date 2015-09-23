@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Configuration
-@RestController
 class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Logger LOGGER = Logger.getLogger(SecurityConfig.class)
 
