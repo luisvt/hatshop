@@ -12,9 +12,7 @@ import org.springframework.data.jpa.repository.Query
  */
 interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    @Query("SELECT p FROM Product p JOIN p.categories pc WHERE pc.department.id = ?")
-    Page<Product> findPageByDepartmentId(Integer id, Pageable pageable)
+    Page<Product> findPageByCategories_Department_Id(Integer id, Pageable pageable)
 
-    @Query('SELECT p FROM Product p JOIN p.categories pc WHERE pc.id = ?')
-    Page<Product> findPageByCategoryId(Integer id, Pageable pageable)
+    Page<Product> findPageByCategories_Id(Integer id, Pageable pageable)
 }

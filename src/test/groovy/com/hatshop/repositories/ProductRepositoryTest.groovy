@@ -2,7 +2,6 @@ package com.hatshop.repositories
 
 import com.hatshop.HatshopApplication
 import com.hatshop.models.Product
-import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,15 +25,15 @@ public class ProductRepositoryTest {
     @Autowired ProductRepository productRepository
 
     @Test
-    public void testFindAllByDepartmentId() throws Exception {
-        Page<Product> productsPage = productRepository.findPageByDepartmentId(2, new PageRequest(0, 50))
+    public void testFindAllByCategories_Department_Id() throws Exception {
+        Page<Product> productsPage = productRepository.findPageByCategories_Department_Id(2, new PageRequest(0, 50))
 
         assertEquals 8, productsPage.content.size()
     }
 
     @Test
-    public void testFindAllByCategoryId() {
-        def productsPage = productRepository.findPageByCategoryId(1, new PageRequest(0, 20));
+    public void testFindAllByCategories_Id() {
+        def productsPage = productRepository.findPageByCategories_Id(1, new PageRequest(0, 20));
 
         assertEquals 7, productsPage.content.size()
     }

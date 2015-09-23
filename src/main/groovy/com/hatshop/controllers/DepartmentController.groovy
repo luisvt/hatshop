@@ -1,14 +1,12 @@
 package com.hatshop.controllers
 
 import com.hatshop.AbstractRestController
-import com.hatshop.Constants
 import com.hatshop.models.Department
 import com.hatshop.models.Product
 import com.hatshop.repositories.DepartmentRepository
 import com.hatshop.repositories.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -37,6 +35,6 @@ class DepartmentController extends AbstractRestController<Department, Integer> {
     Page<Product> departmentProducts(@PathVariable Integer id,
                                      @RequestParam(defaultValue = PAGE_NUMBER) int page,
                                      @RequestParam(defaultValue = PAGE_SIZE) int size) {
-        productRepository.findPageByDepartmentId(id, new PageRequest(page, size))
+        productRepository.findPageByCategories_Department_Id(id, new PageRequest(page, size))
     }
 }
