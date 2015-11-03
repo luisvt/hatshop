@@ -1,6 +1,7 @@
 package com.hatshop.security
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.core.env.Environment
 
 import javax.servlet.Filter
@@ -15,13 +16,13 @@ import javax.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component
 
 @Component
+@Profile('development')
 public class CorsFilter implements Filter {
 
     @Autowired
     Environment environment
 
     void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if(environment.acceptsProfiles('default')) {
             HttpServletResponse response = (HttpServletResponse) res
             HttpServletRequest request = (HttpServletRequest) req
             response.setHeader("Access-Control-Allow-Origin", "*")
@@ -30,7 +31,6 @@ public class CorsFilter implements Filter {
             if (request.getMethod() != 'OPTIONS') {
                 chain.doFilter(req, res)
             }
-        }
     }
 
     void init(FilterConfig filterConfig) {}

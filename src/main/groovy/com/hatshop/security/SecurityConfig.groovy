@@ -1,20 +1,18 @@
 package com.hatshop.security
 
-import com.hatshop.security.services.CustomUserDetailsService
 import org.apache.log4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
-import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.csrf.CsrfFilter
 import org.springframework.security.web.csrf.CsrfToken
 import org.springframework.security.web.csrf.CsrfTokenRepository
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
-import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.util.WebUtils
 
@@ -25,12 +23,14 @@ import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+import static org.springframework.http.HttpMethod.GET
+
 @Configuration
 class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Logger LOGGER = Logger.getLogger(SecurityConfig.class)
 
     @Autowired
-    private CustomUserDetailsService userDetailsService
+    private UserDetailsService userDetailsService
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,19 +48,19 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
             http.authorizeRequests()
                 .antMatchers(
                     "/",
+                    "/index.html",
                     '/views/**',
                     "/styles/**",
                     "/scripts/**",
-                    "/fonts/**",
-                    '/session-user'
+                    "/fonts/**"
                 ).permitAll()
-                .antMatchers(HttpMethod.POST, "/user").permitAll()
+                .antMatchers(GET, "/products/**", '/departments/**').permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().csrf().csrfTokenRepository(csrfTokenRepository())
                 .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
 
-        if(environment.acceptsProfiles('default'))
+        if(environment.acceptsProfiles('development'))
             http.authorizeRequests().antMatchers('/**').permitAll()
                 .and().csrf().disable()
     }
