@@ -1,4 +1,4 @@
-package com.hatshop;
+package com.hatshop.utils;
 
 /**
  * This class contains global constants

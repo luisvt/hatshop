@@ -10,6 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 
@@ -39,8 +40,9 @@ public class DepartmentControllerTest {
     @Test
     public void testDepartmentProducts() throws Exception {
         mmvc.perform(get("/departments/2/products").accept(APPLICATION_JSON))
+//                .andDo(MockMvcResultHandlers.print())
                 .andExpect(jsonPath('content', hasSize(8)))
-                .andExpect(jsonPath('content[1].id', is(24)))
-                .andExpect(jsonPath('content[1].description', startsWith("The Parkhurst SunGuard line of headwear")))
+                .andExpect(jsonPath('content[0].id', is(8)))
+                .andExpect(jsonPath('content[0].description', startsWith("Uniform Chauffeur Cap.")))
     }
 }

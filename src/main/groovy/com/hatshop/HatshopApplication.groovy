@@ -7,11 +7,11 @@ import com.hatshop.repositories.ShippingRegionRepository
 import com.hatshop.security.models.Role
 import com.hatshop.security.models.User
 import com.hatshop.security.repositories.UserRepository
+import com.hatshop.utils.CustomObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.context.annotation.Bean
 import org.springframework.core.io.ClassPathResource
 import org.springframework.core.io.support.EncodedResource
 import org.springframework.http.converter.HttpMessageConverter

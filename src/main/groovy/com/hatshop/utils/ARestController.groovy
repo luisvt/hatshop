@@ -1,39 +1,29 @@
-package com.hatshop
+package com.hatshop.utils
 
 import org.apache.commons.beanutils.BeanUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.data.domain.PageRequest
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.web.bind.annotation.*
 
-import static com.hatshop.Constants.PAGE_NUMBER
-import static com.hatshop.Constants.PAGE_SIZE
+public abstract class ARestController<T, ID extends Serializable> {
 
-public abstract class AbstractRestController<T, ID extends Serializable> {
+    private Logger logger = LoggerFactory.getLogger(ARestController.class);
 
-    private Logger logger = LoggerFactory.getLogger(AbstractRestController.class);
-
-    private JpaRepository<T, ID> repo;
+    JpaRepository<T, ID> repo;
 
 
-    public AbstractRestController(JpaRepository<T, ID> repo) {
+    ARestController(JpaRepository<T, ID> repo) {
         this.repo = repo
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public T findOne(@PathVariable ID id) {
+    T findOne(@PathVariable ID id) {
         return repo.findOne(id);
     }
 
-    @RequestMapping
-    public Iterable<T> findAll(@RequestParam(defaultValue = PAGE_NUMBER) Integer page,
-                           @RequestParam(defaultValue = PAGE_SIZE) Integer size) {
-        repo.findAll(new PageRequest(page, size))
-    }
-
     @RequestMapping(method = RequestMethod.POST)
-    public T create(@RequestBody T entity) {
+    T create(@RequestBody T entity) {
         logger.debug("create() with body {} of type {}", entity, entity.getClass());
 
         repo.save entity
@@ -41,7 +31,7 @@ public abstract class AbstractRestController<T, ID extends Serializable> {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public T update(@PathVariable ID id, @RequestBody T json) {
+    T update(@PathVariable ID id, @RequestBody T json) {
         logger.debug("update() of id#{} with body {}", id, json);
         logger.debug("T json is of type {}", json.getClass());
 
@@ -60,7 +50,7 @@ public abstract class AbstractRestController<T, ID extends Serializable> {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable ID id) {
+    void delete(@PathVariable ID id) {
         repo.delete id
     }
 }
