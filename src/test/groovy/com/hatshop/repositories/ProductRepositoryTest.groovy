@@ -1,11 +1,11 @@
 package com.hatshop.repositories
 
-import com.hatshop.HatshopApplication
+import com.hatshop.HatShopApplication
 import com.hatshop.models.Product
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.SpringApplicationConfiguration
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
@@ -18,9 +18,9 @@ import static org.junit.Assert.assertEquals
  * Created by luis on 7/9/15.
  */
 @RunWith(SpringJUnit4ClassRunner)
-@SpringApplicationConfiguration(classes = HatshopApplication)
+@SpringBootTest(classes = HatShopApplication)
 @WebAppConfiguration
-public class ProductRepositoryTest {
+class ProductRepositoryTest {
 
     @Autowired ProductRepository productRepository
 

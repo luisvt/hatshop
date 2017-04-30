@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.web.bind.annotation.RequestMapping
 
 /**
- * Created by luis on 11/4/15.
+ * Abstract class to be extended by rest-controllers which want to respond with a list of element
  */
-public class AListRestController<T, ID extends Serializable> extends ARestController<T, ID> {
-    public AListRestController(JpaRepository<T, ID> repo) {
-        super(repo);
+class AListRestController<T, ID extends Serializable> extends ARestController<T, ID> {
+    AListRestController(JpaRepository<T, ID> repo) {
+        super(repo)
     }
 
     @RequestMapping

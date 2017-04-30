@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 import static com.hatshop.utils.Constants.PAGE_NUMBER
-import static com.hatshop.utils.Constants.PAGE_SIZE;
+import static com.hatshop.utils.Constants.PAGE_SIZE
 
 /**
- * Created by luis on 11/4/15.
+ * Abstract class to be extended by rest controllers which wants to respond a page of elements
  */
-public class APageRestController<T, ID extends Serializable> extends ARestController<T, ID> {
+class APageRestController<T, ID extends Serializable> extends ARestController<T, ID> {
 
     APageRestController(JpaRepository<T, ID> repo) {
         super(repo)

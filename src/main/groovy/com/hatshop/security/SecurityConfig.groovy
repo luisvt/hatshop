@@ -34,63 +34,58 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        LOGGER.debug('configuring AuthenticationManagerBuilder')
         auth
             .userDetailsService(userDetailsService)
             .passwordEncoder(new BCryptPasswordEncoder())
     }
 
     @Autowired
-    Environment environment;
+    Environment environment
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        if(environment.acceptsProfiles('production'))
-            http.authorizeRequests()
-                .antMatchers(
-                    "/",
-                    "/index.html",
-                    '/views/**',
-                    "/styles/**",
-                    "/scripts/**",
-                    "/fonts/**"
-                ).permitAll()
-                .antMatchers(GET, "/products/**", '/departments/**').permitAll()
-                .anyRequest().authenticated()
-                .and().httpBasic()
-                .and().csrf().csrfTokenRepository(csrfTokenRepository())
-                .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-
-        if(environment.acceptsProfiles('development'))
-            http.authorizeRequests().antMatchers('/**').permitAll()
-                .and().csrf().disable()
+        LOGGER.debug('configuring HttpSecurity')
+        http.authorizeRequests()
+            .antMatchers("/", "/index.html", '/views/**', "/styles/**", "/scripts/**", "/fonts/**")
+            .permitAll()
+            .antMatchers(GET, "/products/**", '/departments/**').permitAll()
+            .anyRequest().authenticated()
+            .and().httpBasic()
+            // next 3 lines are added to avoid sending back `WWW-AUTHENTICATION` header
+            // this header is responsible of showing base-auth login popup in the browser.
+            .authenticationEntryPoint({ req, res, authException ->
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED)
+            })
+            .and().csrf().csrfTokenRepository(csrfTokenRepository())
+            .and().addFilterAfter(csrfHeaderFilter(), CsrfFilter)
     }
 
-    private Filter csrfHeaderFilter() {
+    private static Filter csrfHeaderFilter() {
         return new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request,
                                             HttpServletResponse response, FilterChain filterChain)
                     throws ServletException, IOException {
-                def csrf = (CsrfToken) request.getAttribute(CsrfToken.class
-                        .getName());
+                def csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName())
                 if (csrf != null) {
-                    Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
-                    String token = csrf.getToken();
+                    def cookie = WebUtils.getCookie(request, "XSRF-TOKEN")
+                    String token = csrf.getToken()
                     if (cookie == null || token != null
-                            && !token.equals(cookie.getValue())) {
-                        cookie = new Cookie("XSRF-TOKEN", token);
-                        cookie.setPath("/");
-                        response.addCookie(cookie);
+                            && token != cookie.getValue()) {
+                        cookie = new Cookie("XSRF-TOKEN", token)
+                        cookie.setPath("/")
+                        response.addCookie(cookie)
                     }
                 }
-                filterChain.doFilter(request, response);
+                filterChain.doFilter(request, response)
             }
-        };
+        }
     }
 
-    private CsrfTokenRepository csrfTokenRepository() {
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-        repository.setHeaderName("X-XSRF-TOKEN");
-        return repository;
+    private static CsrfTokenRepository csrfTokenRepository() {
+        def repository = new HttpSessionCsrfTokenRepository()
+        repository.setHeaderName("X-XSRF-TOKEN")
+        repository
     }
 }

@@ -23,10 +23,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.sql.DataSource
 
 @SpringBootApplication
-class HatshopApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
+class HatShopApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
     static void main(String[] args) {
-        SpringApplication.run HatshopApplication.class
+        SpringApplication.run HatShopApplication.class
     }
 
     @Autowired UserRepository userRepository
@@ -36,8 +36,8 @@ class HatshopApplication extends WebMvcConfigurerAdapter implements CommandLineR
     @Autowired DataSource dataSource
 
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new MappingJackson2HttpMessageConverter(new CustomObjectMapper()));
+    void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new MappingJackson2HttpMessageConverter(new CustomObjectMapper()))
     }
 
     @Override

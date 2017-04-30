@@ -13,25 +13,25 @@ public class Product implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     int id
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     String name
 
-    @Column(name = "description", nullable = false, length = 1000)
+    @Column(nullable = false, length = 1000)
     String description
 
-    @Column(name = "price", nullable = false, precision = 10)
+    @Column(nullable = false, precision = 10)
     BigDecimal price
 
-    @Column(name = "discounted_price", nullable = false, precision = 10)
+    @Column(nullable = false, precision = 10)
     BigDecimal discountedPrice
 
-    @Column(name = "image", length = 150)
+    @Column(length = 150)
     String image
 
-    @Column(name = "thumbnail", length = 150)
+    @Column(length = 150)
     String thumbnail
 
-    @Column(name = "display", nullable = false)
+    @Column(nullable = false)
     short display
 
 //    @Column(name = "search_vector")
