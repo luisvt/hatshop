@@ -18,7 +18,7 @@ import javax.persistence.*
         uniqueConstraints = @UniqueConstraint(columnNames = "email")
 )
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Customer.class)
-public class Customer implements java.io.Serializable {
+class Customer implements Serializable {
     @Id
     @Column(name = "id", unique = true, nullable = false)
     int id

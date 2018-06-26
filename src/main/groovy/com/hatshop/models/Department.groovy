@@ -13,7 +13,7 @@ import javax.persistence.*
 @NamedEntityGraph(name = "Department.categories",
     attributeNodes = @NamedAttributeNode("categories"))
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator)
-public class Department {
+class Department {
     @Id
     @Column(name = "id", unique = true, nullable = false)
     Integer id

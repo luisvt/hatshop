@@ -11,7 +11,7 @@ import javax.persistence.*
 @Table(name = "order_detail"
         , schema = "public"
 )
-public class OrderDetail implements java.io.Serializable {
+class OrderDetail implements Serializable {
     @EmbeddedId
     @AttributeOverrides([
             @AttributeOverride(name = "orderId", column = @Column(name = "order_id", nullable = false)),
@@ -31,7 +31,9 @@ public class OrderDetail implements java.io.Serializable {
     @Column(name = "unit_cost", nullable = false, precision = 10)
     BigDecimal unitCost
 
-    public OrderDetail(OrderDetailId id, EOrder orders, String productName, int quantity, BigDecimal unitCost) {
+    OrderDetail() {}
+
+    OrderDetail(OrderDetailId id, EOrder orders, String productName, int quantity, BigDecimal unitCost) {
         this.id = id
         this.orders = orders
         this.productName = productName

@@ -8,7 +8,7 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "shopping_cart", schema = "public")
-public class ShoppingCart implements java.io.Serializable {
+class ShoppingCart implements Serializable {
     @EmbeddedId
     @AttributeOverrides([
             @AttributeOverride(name = "id", column = @Column(name = "id", nullable = false, length = 32)),

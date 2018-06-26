@@ -8,7 +8,7 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "review", schema = "public")
-public class Review implements java.io.Serializable {
+class Review implements Serializable {
     @Id
     @Column(name = "id", unique = true, nullable = false)
     int id

@@ -1,13 +1,13 @@
 package com.hatshop.utils
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.web.ErrorAttributes
-import org.springframework.boot.autoconfigure.web.ErrorController
+import org.springframework.boot.web.servlet.error.ErrorAttributes
+import org.springframework.boot.web.servlet.error.ErrorController
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.context.request.ServletRequestAttributes
+import org.springframework.web.context.request.WebRequest
 
 import javax.servlet.http.HttpServletRequest
 
@@ -26,8 +26,8 @@ class CustomErrorController implements ErrorController {
      * @return
      */
     @RequestMapping(value = '/error')
-    ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
-        Map<String, Object> body = getErrorAttributes(request, getTraceParameter(request))
+    ResponseEntity<Map<String, Object>> error(HttpServletRequest request, WebRequest webRequest) {
+        Map<String, Object> body = errorAttributes.getErrorAttributes(webRequest, getTraceParameter(request))
         HttpStatus status = getStatus(request)
         return new ResponseEntity<Map<String, Object>>(body, status)
     }
@@ -45,12 +45,6 @@ class CustomErrorController implements ErrorController {
 
     private static boolean getTraceParameter(HttpServletRequest request) {
         "false" != request.getParameter("trace")?.toLowerCase()
-    }
-
-    private Map<String, Object> getErrorAttributes(HttpServletRequest request,
-                                                   boolean includeStackTrace) {
-        def requestAttributes = new ServletRequestAttributes(request)
-        return this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace)
     }
 
     private static HttpStatus getStatus(HttpServletRequest request) {

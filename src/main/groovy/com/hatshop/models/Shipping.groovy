@@ -11,7 +11,7 @@ import javax.persistence.*
 @Table(name = "shipping"
         , schema = "public"
 )
-public class Shipping implements java.io.Serializable {
+class Shipping implements Serializable {
     @Id
     @Column(name = "id", unique = true, nullable = false)
     int id
@@ -29,14 +29,16 @@ public class Shipping implements java.io.Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shipping")
     Set<EOrder> orders = new HashSet<EOrder>(0)
 
-    public Shipping(int id, ShippingRegion shippingRegion, String shippingType, BigDecimal shippingCost) {
+    Shipping() {}
+
+    Shipping(int id, ShippingRegion shippingRegion, String shippingType, BigDecimal shippingCost) {
         this.id = id
         this.shippingRegion = shippingRegion
         this.shippingType = shippingType
         this.shippingCost = shippingCost
     }
 
-    public Shipping(int id, ShippingRegion shippingRegion, String shippingType, BigDecimal shippingCost, Set<EOrder> orderses) {
+    Shipping(int id, ShippingRegion shippingRegion, String shippingType, BigDecimal shippingCost, Set<EOrder> orderses) {
         this.id = id
         this.shippingRegion = shippingRegion
         this.shippingType = shippingType

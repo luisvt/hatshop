@@ -12,18 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.context.annotation.Bean
 import org.springframework.core.io.ClassPathResource
 import org.springframework.core.io.support.EncodedResource
-import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.jdbc.datasource.init.ScriptUtils
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import javax.sql.DataSource
 
 @SpringBootApplication
-class HatShopApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
+class HatShopApplication implements CommandLineRunner {
 
     static void main(String[] args) {
         SpringApplication.run HatShopApplication.class
@@ -35,9 +34,14 @@ class HatShopApplication extends WebMvcConfigurerAdapter implements CommandLineR
 
     @Autowired DataSource dataSource
 
-    @Override
-    void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new MappingJackson2HttpMessageConverter(new CustomObjectMapper()))
+//    @Override
+//    void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//        converters.add(new MappingJackson2HttpMessageConverter(new CustomObjectMapper()))
+//    }
+
+    @Bean
+    MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
+        return new MappingJackson2HttpMessageConverter(new CustomObjectMapper())
     }
 
     @Override
@@ -46,7 +50,7 @@ class HatShopApplication extends WebMvcConfigurerAdapter implements CommandLineR
         def roleUser = new Role(authority: "ROLE_USER"),
             encoder = new BCryptPasswordEncoder()
 
-        userRepository.save([
+        userRepository.saveAll([
                 new User("user1", encoder.encode("password1"), [roleUser]),
                 new User("user2", encoder.encode("password2"), [roleUser])
         ])
@@ -57,7 +61,7 @@ class HatShopApplication extends WebMvcConfigurerAdapter implements CommandLineR
         def shippingRegion = new ShippingRegion(1, 'region1')
         shippingRegionRepository.save(shippingRegion)
 
-        shippingRegion.customers = customerRepository.save([
+        shippingRegion.customers = customerRepository.saveAll([
                 new Customer(
                         id: 1,
                         name: 'cust1',

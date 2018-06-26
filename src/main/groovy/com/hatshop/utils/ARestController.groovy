@@ -19,7 +19,7 @@ abstract class ARestController<T, ID extends Serializable> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     T findOne(@PathVariable ID id) {
-        return repo.findOne(id)
+        repo.findById(id).get()
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -35,7 +35,7 @@ abstract class ARestController<T, ID extends Serializable> {
         logger.debug("update() of id#{} with body {}", id, json)
         logger.debug("T json is of type {}", json.getClass())
 
-        T entity = repo.findOne(id)
+        Optional<T> entity = repo.findById(id)
         try {
             BeanUtils.copyProperties(entity, json)
         }
@@ -46,7 +46,7 @@ abstract class ARestController<T, ID extends Serializable> {
 
         logger.debug("merged entity: {}", entity)
 
-        repo.save entity
+        repo.save entity.get()
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

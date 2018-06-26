@@ -1,4 +1,4 @@
-package com.hatshop.models;
+package com.hatshop.models
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 
 
@@ -9,31 +9,33 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "audit", schema = "public")
-public class Audit implements java.io.Serializable {
+class Audit implements java.io.Serializable {
     @Id
     @Column(name = "id", unique = true, nullable = false)
-    int id;
+    int id
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
-    EOrder orders;
+    EOrder orders
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_on", nullable = false, length = 29)
-    Date createdOn;
+    Date createdOn
 
     @Column(name = "message", nullable = false)
-    String message;
+    String message
 
     @Column(name = "message_number", nullable = false)
-    int messageNumber;
+    int messageNumber
 
-    public Audit(int id, EOrder orders, Date createdOn, String message, int messageNumber) {
-        this.id = id;
-        this.orders = orders;
-        this.createdOn = createdOn;
-        this.message = message;
-        this.messageNumber = messageNumber;
+    Audit(){}
+
+    Audit(int id, EOrder orders, Date createdOn, String message, int messageNumber) {
+        this.id = id
+        this.orders = orders
+        this.createdOn = createdOn
+        this.message = message
+        this.messageNumber = messageNumber
     }
 }
 

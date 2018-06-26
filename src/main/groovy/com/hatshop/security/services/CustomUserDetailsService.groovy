@@ -2,7 +2,7 @@ package com.hatshop.security.services
 
 import com.hatshop.security.models.User
 import com.hatshop.security.repositories.UserRepository
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service
 @Service
 class CustomUserDetailsService implements UserDetailsService {
 
-    private static final LOGGER = Logger.getLogger(CustomUserDetailsService)
+    private static final LOGGER = LoggerFactory.getLogger(CustomUserDetailsService)
 
     @Autowired
     private UserRepository userRepository

@@ -1,10 +1,10 @@
 package com.hatshop.security.models
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.hibernate.validator.constraints.NotEmpty
 import org.springframework.security.core.userdetails.UserDetails
 
 import javax.persistence.*
+import javax.validation.constraints.NotEmpty
 
 /**
  * Created by luis on 4/18/15.

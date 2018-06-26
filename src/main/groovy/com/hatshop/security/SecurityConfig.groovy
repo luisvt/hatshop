@@ -1,6 +1,6 @@
 package com.hatshop.security
 
-import org.apache.log4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
@@ -27,7 +27,7 @@ import static org.springframework.http.HttpMethod.GET
 
 @Configuration
 class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final Logger LOGGER = Logger.getLogger(SecurityConfig.class)
+    private static final LOGGER = LoggerFactory.getLogger(SecurityConfig.class)
 
     @Autowired
     private UserDetailsService userDetailsService
@@ -49,7 +49,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .antMatchers("/", "/index.html", '/views/**', "/styles/**", "/scripts/**", "/fonts/**")
             .permitAll()
-            .antMatchers(GET, "/products/**", '/departments/**').permitAll()
+            .antMatchers(GET, "/products/**", '/departments/**', '/categories/**').permitAll()
             .anyRequest().authenticated()
             .and().httpBasic()
             // next 3 lines are added to avoid sending back `WWW-AUTHENTICATION` header
