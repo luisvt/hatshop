@@ -4,13 +4,14 @@ import com.hatshop.server.models.Product
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.data.jpa.repository.Query
 
 /**
  * Handles the products data
  * Created by luis on 6/19/15.
  */
-interface ProductRepository extends JpaRepository<Product, Integer> {
+interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 
     Page<Product> findPageByCategories_Department_Id(Integer id, Pageable pageable)
 

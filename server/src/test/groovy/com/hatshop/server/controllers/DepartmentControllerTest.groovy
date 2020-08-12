@@ -1,12 +1,10 @@
 package com.hatshop.server.controllers
 
-import com.hatshop.HatShopApplication
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import com.hatshop.server.HatShopApplication
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -21,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Test for DepartmentController
  * Created by luis on 7/9/15.
  */
-@RunWith(SpringJUnit4ClassRunner)
+//@RunWith(SpringJUnit4ClassRunner)
 @SpringBootTest(classes = HatShopApplication)
 @WebAppConfiguration
 class DepartmentControllerTest {
@@ -31,12 +29,12 @@ class DepartmentControllerTest {
 
     MockMvc mmvc
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         mmvc = MockMvcBuilders.webAppContextSetup(wac).build()
     }
     @Test
-    public void testDepartmentProducts() throws Exception {
+    void testDepartmentProducts() throws Exception {
         mmvc.perform(get("/departments/2/products").accept(APPLICATION_JSON))
 //                .andDo(MockMvcResultHandlers.print())
                 .andExpect(jsonPath('content', hasSize(8)))

@@ -1,6 +1,7 @@
 package com.hatshop.server.utils
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.web.error.ErrorAttributeOptions
 import org.springframework.boot.web.servlet.error.ErrorAttributes
 import org.springframework.boot.web.servlet.error.ErrorController
 import org.springframework.http.HttpStatus
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.context.request.WebRequest
 
 import javax.servlet.http.HttpServletRequest
+
+import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.STACK_TRACE
 
 @RestController
 class CustomErrorController implements ErrorController {
@@ -27,7 +30,7 @@ class CustomErrorController implements ErrorController {
      */
     @RequestMapping(value = '/error')
     ResponseEntity<Map<String, Object>> error(HttpServletRequest request, WebRequest webRequest) {
-        Map<String, Object> body = errorAttributes.getErrorAttributes(webRequest, getTraceParameter(request))
+        Map<String, Object> body = errorAttributes.getErrorAttributes(webRequest, ErrorAttributeOptions.of(STACK_TRACE))
         HttpStatus status = getStatus(request)
         return new ResponseEntity<Map<String, Object>>(body, status)
     }
@@ -38,14 +41,8 @@ class CustomErrorController implements ErrorController {
      * @return the error path
      */
     @Override
-    String getErrorPath() {
-        return '/error'
-    }
+    String getErrorPath() { '/error' }
 
-
-    private static boolean getTraceParameter(HttpServletRequest request) {
-        "false" != request.getParameter("trace")?.toLowerCase()
-    }
 
     private static HttpStatus getStatus(HttpServletRequest request) {
         def statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code")

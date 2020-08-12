@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.codehaus.groovy:groovy'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.11.2'
 	implementation 'commons-beanutils:commons-beanutils:1.6'
+	implementation 'cz.jirutka.rsql:rsql-parser:2.1.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'

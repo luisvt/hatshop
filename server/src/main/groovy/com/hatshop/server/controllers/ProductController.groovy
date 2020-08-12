@@ -2,7 +2,7 @@ package com.hatshop.server.controllers
 
 import com.hatshop.server.models.Product
 import com.hatshop.server.repositories.ProductRepository
-import com.hatshop.server.utils.APageRestController
+import com.hatshop.server.utils.AbstractRestController
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("products")
-class ProductController extends APageRestController<Product, Integer> {
+class ProductController extends AbstractRestController<Product, Integer> {
     @Autowired
     ProductController(ProductRepository repo) {
         super(repo)

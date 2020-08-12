@@ -1,13 +1,12 @@
 package com.hatshop.server.controllers
 
-import com.hatshop.server.utils.AListRestController
-import com.hatshop.server.utils.ARestController
 import com.hatshop.server.models.Category
 import com.hatshop.server.models.Department
 import com.hatshop.server.models.Product
 import com.hatshop.server.repositories.CategoryRepository
 import com.hatshop.server.repositories.DepartmentRepository
 import com.hatshop.server.repositories.ProductRepository
+import com.hatshop.server.utils.AbstractRestController
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
@@ -25,7 +24,7 @@ import static com.hatshop.server.utils.Constants.PAGE_SIZE
  */
 @RestController
 @RequestMapping("departments")
-class DepartmentController extends AListRestController<Department, Integer> {
+class DepartmentController extends AbstractRestController<Department, Integer> {
     @Autowired
     DepartmentController(DepartmentRepository repo) {
         super(repo)
@@ -41,7 +40,7 @@ class DepartmentController extends AListRestController<Department, Integer> {
     Page<Product> departmentProducts(@PathVariable Integer id,
                                      @RequestParam(defaultValue = PAGE_NUMBER) int page,
                                      @RequestParam(defaultValue = PAGE_SIZE) int size) {
-        productRepository.findPageByCategories_Department_Id(id, new PageRequest(page, size))
+        productRepository.findPageByCategories_Department_Id(id, PageRequest.of(page, size))
     }
 
     @RequestMapping('/{id}/categories')
@@ -55,6 +54,6 @@ class DepartmentController extends AListRestController<Department, Integer> {
             @PathVariable Integer categoryId,
             @RequestParam(defaultValue = PAGE_NUMBER) int page,
             @RequestParam(defaultValue = PAGE_SIZE) int size) {
-        productRepository.findPageByCategories_Id(categoryId, new PageRequest(page, size))
+        productRepository.findPageByCategories_Id(categoryId, PageRequest.of(page, size))
     }
 }
