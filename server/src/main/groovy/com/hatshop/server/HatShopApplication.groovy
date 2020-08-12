@@ -1,7 +1,6 @@
 package com.hatshop.server
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module
 import com.hatshop.server.models.Customer
 import com.hatshop.server.models.ShippingRegion
@@ -81,9 +80,9 @@ class HatShopApplication implements CommandLineRunner, WebMvcConfigurer {
         shippingRegion.customers = customerRepository.saveAll([
                 new Customer(
                         id: 1,
-                        name: 'cust1',
-                        password: 'pass1',
-                        email: 'cust1@email.com',
+                        name: 'customer1',
+                        password: 'password1',
+                        email: 'customer1@email.com',
                         shippingRegion: shippingRegion
                 )
         ])
