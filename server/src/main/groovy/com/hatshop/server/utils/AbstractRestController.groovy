@@ -31,6 +31,16 @@ abstract class AbstractRestController<T, ID extends Serializable> {
         toSerializable(repo.findById(id).orElseThrow { new ResourceNotFoundException() }, project)
     }
 
+    @GetMapping(value = "/{id}/{property}")
+    def findProperty(@PathVariable ID id, @PathVariable String property, @RequestParam(required = false) List<String> project) {
+        def item = repo.findById(id).orElseThrow { new ResourceNotFoundException() }
+        if (item[property]) {
+            return toSerializable(item[property])
+        } else {
+            throw new ResourceNotFoundException()
+        }
+    }
+
     protected _findAll(page, size, search) {
         if (search) {
             def rootNode = new RSQLParser().parse(search)
@@ -42,6 +52,7 @@ abstract class AbstractRestController<T, ID extends Serializable> {
         }
 
         if (size == 0) return repo.findAll()
+        if (size == 1) return repo.findAll(PageRequest.of(page, size))[0]
         repo.findAll(PageRequest.of(page, size))
     }
 

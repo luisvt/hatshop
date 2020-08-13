@@ -66,10 +66,10 @@ class HatShopApplication implements CommandLineRunner, WebMvcConfigurer {
         def roleUser = new Role(authority: "ROLE_USER"),
             encoder = new BCryptPasswordEncoder()
 
-        userRepository.saveAll([
-                new User("user1", encoder.encode("password1"), [roleUser]),
-                new User("user2", encoder.encode("password2"), [roleUser])
-        ])
+//        userRepository.saveAll([
+//                new User("user1", encoder.encode("password1"), [roleUser]),
+//                new User("user2", encoder.encode("password2"), [roleUser])
+//        ])
 
 //		def resource = new EncodedResource(new ClassPathResource("_data.sql"))
 //		ScriptUtils.executeSqlScript(dataSource.connection, resource, true, true, '--', ';', '/*', '*/')
@@ -80,8 +80,10 @@ class HatShopApplication implements CommandLineRunner, WebMvcConfigurer {
         shippingRegion.customers = customerRepository.saveAll([
                 new Customer(
                         id: 1,
-                        name: 'customer1',
-                        password: 'password1',
+                        firstName: 'customer1',
+                        lastName: 'customer1',
+                        username: 'customer1',
+                        password: encoder.encode("password1"),
                         email: 'customer1@email.com',
                         shippingRegion: shippingRegion
                 )

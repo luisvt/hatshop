@@ -23,15 +23,32 @@ class User implements UserDetails {
     Collection<Role> authorities
 
     @NotEmpty
+    @Column(nullable = false, length = 100)
     @JsonProperty(access = WRITE_ONLY)
     String password
 
     @NotEmpty
+    @Column(unique = true, nullable = false, length = 30)
     String username
 
+    @NotEmpty
+    @Column(unique = true, nullable = false, length = 50)
+    String email
+
+    @NotEmpty
+    @Column(nullable = false, length = 50)
+    String firstName
+
+    @NotEmpty
+    @Column(nullable = false, length = 50)
+    String lastName
+
     boolean accountNonExpired = true
+
     boolean accountNonLocked = true
+
     boolean credentialsNonExpired = true
+
     boolean enabled = true
 
     User() {}
