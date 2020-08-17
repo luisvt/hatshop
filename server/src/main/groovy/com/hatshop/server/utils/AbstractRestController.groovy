@@ -17,9 +17,9 @@ import static com.hatshop.server.utils.ToSerializable.toSerializable
 
 abstract class AbstractRestController<T, ID extends Serializable> {
 
-    private Logger logger = LoggerFactory.getLogger(AbstractRestController)
+    private final Logger logger = LoggerFactory.getLogger(AbstractRestController)
 
-    JpaRepository<T, ID> repo
+    protected final JpaRepository<T, ID> repo
 
 
     AbstractRestController(JpaRepository<T, ID> repo) {
@@ -32,10 +32,12 @@ abstract class AbstractRestController<T, ID extends Serializable> {
     }
 
     @GetMapping(value = "/{id}/{property}")
-    def findProperty(@PathVariable ID id, @PathVariable String property, @RequestParam(required = false) List<String> project) {
+    def findProperty(@PathVariable ID id,
+                     @PathVariable String property,
+                     @RequestParam(required = false) List<String> project) {
         def item = repo.findById(id).orElseThrow { new ResourceNotFoundException() }
         if (item[property]) {
-            return toSerializable(item[property])
+            return toSerializable(item[property], project)
         } else {
             throw new ResourceNotFoundException()
         }

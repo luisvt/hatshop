@@ -7,3 +7,8 @@ spring:
       detection-strategy: annotated
   datasource:
     url: jdbc:h2:mem:test
+---
+spring:
+  profiles: prod
+  datasource:
+    initialization-mode: never
