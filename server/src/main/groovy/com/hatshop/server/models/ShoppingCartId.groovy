@@ -10,11 +10,13 @@ import javax.persistence.Embeddable
  */
 @Embeddable
 class ShoppingCartId implements Serializable {
-    @Column(name = "id", nullable = false, length = 32)
+    @Column(nullable = false, length = 32)
     String id
 
-    @Column(name = "product_id", nullable = false)
+    @Column(nullable = false)
     int productId
+
+    ShoppingCartId() {}
 
     ShoppingCartId(String id, int productId) {
         this.id = id

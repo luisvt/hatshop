@@ -10,10 +10,10 @@ import javax.persistence.Embeddable
  */
 @Embeddable
 class OrderDetailId implements Serializable {
-    @Column(name = "order_id", nullable = false)
+    @Column(nullable = false)
     int orderId
 
-    @Column(name = "product_id", nullable = false)
+    @Column(nullable = false)
     int productId
 
     boolean equals(Object other) {

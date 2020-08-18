@@ -35,7 +35,7 @@ class Category {
     String description
 
     @ManyToMany
-    @JoinTable(name = "product_category", schema = "public",
+    @JoinTable(
             joinColumns = [@JoinColumn(name = "category_id", nullable = false, updatable = false)],
             inverseJoinColumns = [@JoinColumn(name = "product_id", nullable = false, updatable = false)])
     Set<Product> products = new HashSet<Product>(0)

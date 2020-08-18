@@ -8,7 +8,6 @@ import static javax.persistence.TemporalType.TIMESTAMP
 
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 @Entity
-@Table(name = "e_order", schema = "public")
 class EOrder implements Serializable {
     @Id
     @Column(name = "id", unique = true, nullable = false)
