@@ -1,13 +1,10 @@
 package com.hatshop.server.controllers
 
-import com.hatshop.server.HatShopApplication
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 
@@ -20,9 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Test for DepartmentController
  * Created by luis on 7/9/15.
  */
-//@RunWith(SpringJUnit4ClassRunner)
-@SpringBootTest(classes = HatShopApplication)
-@WebAppConfiguration
+@SpringBootTest
 class DepartmentControllerTest {
 
     @Autowired
@@ -34,12 +29,13 @@ class DepartmentControllerTest {
     void setUp() {
         mmvc = MockMvcBuilders.webAppContextSetup(wac).build()
     }
+
     @Test
     void testDepartmentProducts() throws Exception {
-        mmvc.perform(get("/departments/2/products").accept(APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
+        mmvc.perform(get("/api/departments/2/products").accept(APPLICATION_JSON))
+//                .andDo(MockMvcResultHandlers.print())
                 .andExpect(jsonPath('items', hasSize(8)))
-                .andExpect(jsonPath('items[0].id', is(8)))
+                .andExpect(jsonPath('items[0].id', is(18)))
                 .andExpect(jsonPath('items[0].description', startsWith("Uniform Chauffeur Cap.")))
     }
 }

@@ -33,7 +33,7 @@ class Product implements Serializable {
 
     @Id
     @GeneratedValue
-    int id
+    Integer id
 
     @NotEmpty
     @Column(nullable = false, length = 50)
@@ -70,7 +70,7 @@ class Product implements Serializable {
     Set<ShoppingCart> shoppingCarts = new HashSet<ShoppingCart>(0)
 
     @ManyToMany
-    @JoinTable(
+    @JoinTable(name = 'product_category',
             joinColumns = [@JoinColumn(name = "product_id", nullable = false, updatable = false)],
             inverseJoinColumns = [@JoinColumn(name = "category_id", nullable = false, updatable = false)])
     Set<Category> categories = new HashSet<Category>(0)

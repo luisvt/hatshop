@@ -1,11 +1,8 @@
 package com.hatshop.server.models
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo
-import com.fasterxml.jackson.annotation.ObjectIdGenerators
 
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
 
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 /**
@@ -22,7 +19,7 @@ class Category {
     }
     @Id
     @GeneratedValue
-    int id
+    Integer id
 
     @ManyToOne(fetch = FetchType.LAZY)
     Department department
@@ -35,7 +32,7 @@ class Category {
     String description
 
     @ManyToMany
-    @JoinTable(
+    @JoinTable(name = 'product_category',
             joinColumns = [@JoinColumn(name = "category_id", nullable = false, updatable = false)],
             inverseJoinColumns = [@JoinColumn(name = "product_id", nullable = false, updatable = false)])
     Set<Product> products = new HashSet<Product>(0)

@@ -1,14 +1,13 @@
 package com.hatshop.server.repositories
 
-import com.hatshop.server.HatShopApplication
-import com.hatshop.server.models.Product
+
+import com.hatshop.server.models.Category
+import com.hatshop.server.models.Department
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.domain.Page
+import org.springframework.data.domain.Example
 import org.springframework.data.domain.PageRequest
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
-import org.springframework.test.context.web.WebAppConfiguration
 
 import static org.junit.jupiter.api.Assertions.assertEquals
 
@@ -16,22 +15,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals
  * Test for ProductRepository
  * Created by luis on 7/9/15.
  */
-@SpringBootTest(classes = HatShopApplication)
-@WebAppConfiguration
+@SpringBootTest
 class ProductRepositoryTest {
 
-    @Autowired ProductRepository productRepository
+    @Autowired
+    ProductRepository productRepository
+
+    @Autowired
+    DepartmentRepository departmentRepository
+
+    @Autowired
+    CategoryRepository categoryRepository
 
     @Test
     void testFindAllByCategories_Department_Id() throws Exception {
-        Page<Product> productsPage = productRepository.findPageByCategories_Department_Id(2, PageRequest.of(0, 50))
+        def dep2 = departmentRepository.findOne(Example.of(new Department(name: 'Caps and Berets'))).get()
+        def productsPage = productRepository.findPageByCategories_Department_Id(dep2.id, PageRequest.of(0, 50))
 
         assertEquals 8, productsPage.content.size()
     }
 
     @Test
     void testFindAllByCategories_Id() {
-        def productsPage = productRepository.findPageByCategories_Id(1, PageRequest.of(0, 20))
+        def cat1 = categoryRepository.findOne(Example.of(new Category(name: 'Christmas Hats'))).get()
+        def productsPage = productRepository.findPageByCategories_Id(cat1.id, PageRequest.of(0, 20))
 
         assertEquals 7, productsPage.content.size()
     }
