@@ -1,6 +1,9 @@
 package com.hatshop.server.repositories
 
 import com.hatshop.server.models.Category
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
@@ -9,4 +12,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
  */
 interface CategoryRepository extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category> {
     List<Category> findAllByDepartment_Id(Integer id)
+    List<Category> findAllByDepartment_Id(Integer id, Sort sort)
+
+    Page<Category> findAllByDepartment_Id(Integer id, PageRequest page)
 }

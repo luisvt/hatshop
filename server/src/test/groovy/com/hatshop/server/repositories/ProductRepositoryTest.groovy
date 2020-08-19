@@ -30,7 +30,7 @@ class ProductRepositoryTest {
     @Test
     void testFindAllByCategories_Department_Id() throws Exception {
         def dep2 = departmentRepository.findOne(Example.of(new Department(name: 'Caps and Berets'))).get()
-        def productsPage = productRepository.findPageByCategories_Department_Id(dep2.id, PageRequest.of(0, 50))
+        def productsPage = productRepository.findAllByCategories_Department_Id(dep2.id, PageRequest.of(0, 50))
 
         assertEquals 8, productsPage.content.size()
     }
@@ -38,7 +38,7 @@ class ProductRepositoryTest {
     @Test
     void testFindAllByCategories_Id() {
         def cat1 = categoryRepository.findOne(Example.of(new Category(name: 'Christmas Hats'))).get()
-        def productsPage = productRepository.findPageByCategories_Id(cat1.id, PageRequest.of(0, 20))
+        def productsPage = productRepository.findAllByCategories_Id(cat1.id, PageRequest.of(0, 20))
 
         assertEquals 7, productsPage.content.size()
     }
