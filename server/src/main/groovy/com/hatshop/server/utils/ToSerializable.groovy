@@ -31,8 +31,8 @@ static Map toSerializable(Object item, project = null) {
                     serializable[fieldName] = fieldValue.collect { toSerializable(it) }
                 } else if (project instanceof Map && project[fieldName]) {
                     serializable[fieldName] = fieldValue.collect { toSerializable(it, project[fieldName]) }
-                } else {
-                    serializable[fieldName] = fieldValue.collect { toObjectId(it) }
+//                } else {
+//                    serializable[fieldName] = fieldValue.collect { toObjectId(it) }
                 }
             } else if (it.type.annotations.any { it instanceof Entity }) {
 //                println 'Serializing Projection'
@@ -42,9 +42,9 @@ static Map toSerializable(Object item, project = null) {
                     serializable[fieldName] = toSerializable(fieldValue)
                 } else if (project instanceof Map && project[fieldName]) {
                     serializable[fieldName] = toSerializable(fieldValue, project[fieldName])
-                } else {
-//                    println 'Serializing to ObjectWithIdOnly'
-                    serializable[fieldName] = toObjectId(fieldValue)
+//                } else {
+////                    println 'Serializing to ObjectWithIdOnly'
+//                    serializable[fieldName] = toObjectId(fieldValue)
                 }
             } else {
 //                println "it.annotations = $it.annotations"

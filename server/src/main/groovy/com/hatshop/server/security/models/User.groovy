@@ -1,7 +1,6 @@
 package com.hatshop.server.security.models
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonIgnoreType
+
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.security.core.userdetails.UserDetails
 
@@ -14,6 +13,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY
  * Created by luis on 4/18/15.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -53,8 +53,11 @@ class User implements UserDetails {
 
     User() {}
 
-    User(String username, String password, Collection<Role> authorities) {
+    User(String firstName, String lastName, String username, String email, String password, Collection<Role> authorities) {
+        this.firstName = firstName
+        this.lastName = lastName
         this.username = username
+        this.email = email
         this.password = password
         this.authorities = authorities
     }

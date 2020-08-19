@@ -11,8 +11,14 @@ import javax.persistence.Id
  */
 @Entity
 class Role implements GrantedAuthority {
+    Role() {}
+
+    Role(String authority) {
+        this.authority = authority
+    }
+
     @Id
     @GeneratedValue
-    int id
+    Integer id
     String authority
 }

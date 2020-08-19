@@ -47,16 +47,15 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         LOGGER.debug('configuring HttpSecurity')
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
+//                .antMatchers("/").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
         http.csrf().disable()
         http.headers().frameOptions().disable()
-//        http.authorizeRequests()
-//            .antMatchers("/", "/index.html", '/views/**', "/styles/**", "/scripts/**", "/fonts/**")
-//            .permitAll()
-//            .antMatchers(GET, "/products/**", '/departments/**', '/categories/**').permitAll()
-//            .anyRequest().authenticated()
-//            .and().httpBasic()
+        http.authorizeRequests()
+//            .antMatchers("/", "/index.html", '/views/**', "/styles/**", "/scripts/**", "/fonts/**").permitAll()
+            .antMatchers(GET, "/api/products/**", '/api/departments/**', '/api/categories/**').permitAll()
+            .antMatchers('/api/**').authenticated()
+        http.httpBasic()
 //            // next 3 lines are added to avoid sending back `WWW-AUTHENTICATION` header
 //            // this header is responsible of showing base-auth login popup in the browser.
 //            .authenticationEntryPoint({ req, res, authException ->

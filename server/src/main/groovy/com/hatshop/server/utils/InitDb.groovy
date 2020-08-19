@@ -1,8 +1,9 @@
-package com.hatshop.server
+package com.hatshop.server.utils
 
 import com.hatshop.server.models.*
 import com.hatshop.server.repositories.*
 import com.hatshop.server.security.models.Role
+import com.hatshop.server.security.models.User
 import com.hatshop.server.security.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
@@ -123,7 +124,7 @@ class InitDb implements CommandLineRunner {
         tax2 = new Tax('No Tax', 0.00)
         taxRepository.saveAll([tax1, tax2])
 
-        def roleUser = new Role(authority: "ROLE_USER"),
+        def roleUser = new Role("ROLE_USER"),
             encoder = new BCryptPasswordEncoder()
 
         customerRepository.saveAll([
@@ -131,12 +132,14 @@ class InitDb implements CommandLineRunner {
                         firstName: 'customer1',
                         lastName: 'customer1',
                         username: 'customer1',
-                        password: encoder.encode("password1"),
+                        password: encoder.encode("password123"),
                         email: 'customer1@email.com',
                         shippingRegion: shipR2,
                         authorities: [roleUser]
                 )
         ])
 
+        def admin1 = new User('Admin', 'One', 'admin1', 'admin1@email.com', encoder.encode('password123'), [new Role('ROLE_ADMIN')])
+        userRepository.save(admin1)
     }
 }
