@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("products")
 class ProductController extends AbstractRestController<Product, Integer> {
-    @Autowired
-    ProductController(ProductRepository repo) {
-        super(repo)
-    }
+  @Autowired
+  ProductController(ProductRepository repo) {
+    super(repo)
+  }
 }

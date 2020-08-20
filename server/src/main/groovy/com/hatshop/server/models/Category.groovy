@@ -10,32 +10,32 @@ import javax.validation.constraints.NotEmpty
  */
 @Entity
 class Category {
-    Category() {}
+  Category() {}
 
-    Category(Department department, String name, String description) {
-        this.department = department
-        this.name = name
-        this.description = description
-    }
-    @Id
-    @GeneratedValue
-    Integer id
+  Category(Department department, String name, String description) {
+    this.department = department
+    this.name = name
+    this.description = description
+  }
+  @Id
+  @GeneratedValue
+  Integer id
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    Department department
+  @ManyToOne(fetch = FetchType.LAZY)
+  Department department
 
-    @NotEmpty
-    @Column(nullable = false, length = 50)
-    String name
+  @NotEmpty
+  @Column(nullable = false, length = 50)
+  String name
 
-    @Column(length = 1000)
-    String description
+  @Column(length = 1000)
+  String description
 
-    @ManyToMany
-    @JoinTable(name = 'product_category',
-            joinColumns = [@JoinColumn(name = "category_id", nullable = false, updatable = false)],
-            inverseJoinColumns = [@JoinColumn(name = "product_id", nullable = false, updatable = false)])
-    Set<Product> products = new HashSet<Product>(0)
+  @ManyToMany
+  @JoinTable(name = 'product_category',
+    joinColumns = [@JoinColumn(name = "category_id", nullable = false, updatable = false)],
+    inverseJoinColumns = [@JoinColumn(name = "product_id", nullable = false, updatable = false)])
+  Set<Product> products = new HashSet<Product>(0)
 }
 
 

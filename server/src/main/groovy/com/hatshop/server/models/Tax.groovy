@@ -12,28 +12,28 @@ import javax.validation.constraints.Size
  */
 @Entity
 class Tax implements Serializable {
-    Tax() {}
+  Tax() {}
 
-    Tax(String taxType, BigDecimal taxPercentage) {
-        this.taxType = taxType
-        this.taxPercentage = taxPercentage
-    }
+  Tax(String taxType, BigDecimal taxPercentage) {
+    this.taxType = taxType
+    this.taxPercentage = taxPercentage
+  }
 
-    @Id
-    @GeneratedValue
-    Integer id
+  @Id
+  @GeneratedValue
+  Integer id
 
-    @NotEmpty
-    @Size(max = 100)
-    @Column(nullable = false, length = 100)
-    String taxType
+  @NotEmpty
+  @Size(max = 100)
+  @Column(nullable = false, length = 100)
+  String taxType
 
-    @NotNull
-    @Column(nullable = false, precision = 10)
-    BigDecimal taxPercentage
+  @NotNull
+  @Column(nullable = false, precision = 10)
+  BigDecimal taxPercentage
 
-    @OneToMany(mappedBy = "tax")
-    Set<EOrder> orders = new HashSet<EOrder>(0)
+  @OneToMany(mappedBy = "tax")
+  Set<EOrder> orders = new HashSet<EOrder>(0)
 }
 
 

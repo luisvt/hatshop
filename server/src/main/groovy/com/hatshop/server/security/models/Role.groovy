@@ -11,14 +11,14 @@ import javax.persistence.Id
  */
 @Entity
 class Role implements GrantedAuthority {
-    Role() {}
+  Role() {}
 
-    Role(String authority) {
-        this.authority = authority
-    }
+  Role(String authority) {
+    this.authority = authority
+  }
 
-    @Id
-    @GeneratedValue
-    Integer id
-    String authority
+  @Id
+  @GeneratedValue
+  Integer id
+  String authority
 }

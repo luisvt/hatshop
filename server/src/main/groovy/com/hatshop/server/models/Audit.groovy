@@ -12,36 +12,36 @@ import javax.validation.constraints.NotNull
  */
 @Entity
 class Audit {
-    @Id
-    @GeneratedValue
-    Integer id
+  @Id
+  @GeneratedValue
+  Integer id
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    EOrder orders
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(nullable = false)
+  EOrder orders
 
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, length = 29)
-    Date createdOn
+  @NotNull
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, length = 29)
+  Date createdOn
 
-    @NotEmpty
-    @Column(nullable = false)
-    String message
+  @NotEmpty
+  @Column(nullable = false)
+  String message
 
-    @NotNull
-    @Column(nullable = false)
-    Integer messageNumber
+  @NotNull
+  @Column(nullable = false)
+  Integer messageNumber
 
-    Audit() {}
+  Audit() {}
 
-    Audit(EOrder orders, Date createdOn, String message, Integer messageNumber) {
-        this.orders = orders
-        this.createdOn = createdOn
-        this.message = message
-        this.messageNumber = messageNumber
-    }
+  Audit(EOrder orders, Date createdOn, String message, Integer messageNumber) {
+    this.orders = orders
+    this.createdOn = createdOn
+    this.message = message
+    this.messageNumber = messageNumber
+  }
 }
 
 

@@ -1,6 +1,7 @@
 package com.hatshop.server.models
 
 import com.hatshop.server.security.models.User
+
 import javax.persistence.*
 
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
@@ -11,45 +12,45 @@ import javax.persistence.*
 @Entity
 class Customer extends User {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    ShippingRegion shippingRegion
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(nullable = false)
+  ShippingRegion shippingRegion
 
-    @Column(length = 30)
-    String creditCard
+  @Column(length = 30)
+  String creditCard
 
-    @Column(length = 100)
-    String address1
+  @Column(length = 100)
+  String address1
 
-    @Column(length = 100)
-    String address2
+  @Column(length = 100)
+  String address2
 
-    @Column(length = 30)
-    String city
+  @Column(length = 30)
+  String city
 
-    @Column(length = 30)
-    String region
+  @Column(length = 30)
+  String region
 
-    @Column(length = 10)
-    String postalCode
+  @Column(length = 10)
+  String postalCode
 
-    @Column(length = 30)
-    String country
+  @Column(length = 30)
+  String country
 
-    @Column(length = 20)
-    String dayPhone
+  @Column(length = 20)
+  String dayPhone
 
-    @Column(length = 20)
-    String evePhone
+  @Column(length = 20)
+  String evePhone
 
-    @Column(length = 20)
-    String mobPhone
+  @Column(length = 20)
+  String mobPhone
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    Set<EOrder> orders = new HashSet<EOrder>(0)
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    Set<Review> reviews = new HashSet<Review>(0)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+  Set<EOrder> orders = new HashSet<EOrder>(0)
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+  Set<Review> reviews = new HashSet<Review>(0)
 }
 
 

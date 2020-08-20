@@ -11,37 +11,37 @@ import javax.validation.constraints.NotNull
  */
 @Embeddable
 class ShoppingCartId implements Serializable {
-    @Column(nullable = false, length = 32)
-    String id
+  @Column(nullable = false, length = 32)
+  String id
 
-    @NotNull
-    @Column(nullable = false)
-    Integer productId
+  @NotNull
+  @Column(nullable = false)
+  Integer productId
 
-    ShoppingCartId() {}
+  ShoppingCartId() {}
 
-    ShoppingCartId(String id, int productId) {
-        this.id = id
-        this.productId = productId
-    }
+  ShoppingCartId(String id, int productId) {
+    this.id = id
+    this.productId = productId
+  }
 
-    boolean equals(Object other) {
-        if ((this == other)) return true
-        if ((other == null)) return false
-        if (!(other instanceof ShoppingCartId)) return false
-        ShoppingCartId castOther = (ShoppingCartId) other
-        
-        return ((this.id == castOther.id) || (this.id != null && castOther.id != null && this.id == castOther.id)) \
-                && (productId == castOther.productId)
-    }
+  boolean equals(Object other) {
+    if ((this == other)) return true
+    if ((other == null)) return false
+    if (!(other instanceof ShoppingCartId)) return false
+    ShoppingCartId castOther = (ShoppingCartId) other
 
-    int hashCode() {
-        int result = 17
+    return ((this.id == castOther.id) || (this.id != null && castOther.id != null && this.id == castOther.id)) \
+                 && (productId == castOther.productId)
+  }
 
-        result = 37 * result + (id?.hashCode() ?: 0)
-        result = 37 * result + productId
-        return result
-    }
+  int hashCode() {
+    int result = 17
+
+    result = 37 * result + (id?.hashCode() ?: 0)
+    result = 37 * result + productId
+    return result
+  }
 }
 
 

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("taxes")
 class TaxController extends AbstractRestController<Tax, Integer> {
-    @Autowired
-    TaxController(TaxRepository repo) {
-        super(repo)
-    }
+  @Autowired
+  TaxController(TaxRepository repo) {
+    super(repo)
+  }
 }

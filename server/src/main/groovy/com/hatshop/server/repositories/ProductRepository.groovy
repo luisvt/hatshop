@@ -13,11 +13,15 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
  */
 interface ProductRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 
-    List<Product> findAllByCategories_Department_Id(Integer id)
-    Iterable<Product> findAllByCategories_Department_Id(Integer id, Sort pageable)
-    Page<Product> findAllByCategories_Department_Id(Integer id, Pageable pageable)
+  List<Product> findAllByCategories_Department_Id(Integer id)
 
-    List<Product> findAllByCategories_Id(Integer id)
-    Iterable<Product> findAllByCategories_Id(Integer id, Sort sort)
-    Page<Product> findAllByCategories_Id(Integer id, Pageable pageable)
+  Iterable<Product> findAllByCategories_Department_Id(Integer id, Sort pageable)
+
+  Page<Product> findAllByCategories_Department_Id(Integer id, Pageable pageable)
+
+  List<Product> findAllByCategories_Id(Integer id)
+
+  Iterable<Product> findAllByCategories_Id(Integer id, Sort sort)
+
+  Page<Product> findAllByCategories_Id(Integer id, Pageable pageable)
 }

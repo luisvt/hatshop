@@ -12,71 +12,71 @@ import static com.hatshop.server.utils.rsql.RsqlSearchOperation.*
 
 class GenericRsqlSpecification<T> implements Specification<T> {
 
-    private String property
-    private ComparisonOperator operator
-    private List<String> arguments
+  private String property
+  private ComparisonOperator operator
+  private List<String> arguments
 
-    GenericRsqlSpecification(String property, ComparisonOperator operator, List<String> arguments) {
-        this.property = property
-        this.operator = operator
-        this.arguments = arguments
-    }
+  GenericRsqlSpecification(String property, ComparisonOperator operator, List<String> arguments) {
+    this.property = property
+    this.operator = operator
+    this.arguments = arguments
+  }
 
-    @Override
-    Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-        List<Object> args = castArguments(root)
-        Object argument = args.get(0)
-        switch (RsqlSearchOperation.getSimpleOperator(operator)) {
+  @Override
+  Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+    List<Object> args = castArguments(root)
+    Object argument = args.get(0)
+    switch (RsqlSearchOperation.getSimpleOperator(operator)) {
 
-            case EQUAL:
-                if (argument instanceof String) {
-                    return builder.like(root.get(property), argument.toString().replace('*', '%'))
-                } else if (argument == null) {
-                    return builder.isNull(root.get(property))
-                } else {
-                    return builder.equal(root.get(property), argument)
-                }
-            case NOT_EQUAL:
-                if (argument instanceof String) {
-                    return builder.notLike(root.<String> get(property), argument.toString().replace('*', '%'))
-                } else if (argument == null) {
-                    return builder.isNotNull(root.get(property))
-                } else {
-                    return builder.notEqual(root.get(property), argument)
-                }
-            case GREATER_THAN:
-                return builder.greaterThan(root.<String> get(property), argument.toString())
-            case GREATER_THAN_OR_EQUAL:
-                return builder.greaterThanOrEqualTo(root.<String> get(property), argument.toString())
-            case LESS_THAN:
-                return builder.lessThan(root.<String> get(property), argument.toString())
-            case LESS_THAN_OR_EQUAL:
-                return builder.lessThanOrEqualTo(root.<String> get(property), argument.toString())
-            case IN:
-                return root.get(property).in(args)
-            case NOT_IN:
-                return builder.not(root.get(property).in(args))
+      case EQUAL:
+        if (argument instanceof String) {
+          return builder.like(root.get(property), argument.toString().replace('*', '%'))
+        } else if (argument == null) {
+          return builder.isNull(root.get(property))
+        } else {
+          return builder.equal(root.get(property), argument)
         }
-
-        return null
-    }
-
-    private List<Object> castArguments(final Root<T> root) {
-
-        Class<? extends Object> type = root.get(property).getJavaType()
-
-        List<Object> args = arguments.collect { arg ->
-            if (type == Integer.class) {
-                return Integer.parseInt(arg)
-            } else if (type == Long.class) {
-                return Long.parseLong(arg)
-            } else {
-                return arg
-            }
+      case NOT_EQUAL:
+        if (argument instanceof String) {
+          return builder.notLike(root.<String> get(property), argument.toString().replace('*', '%'))
+        } else if (argument == null) {
+          return builder.isNotNull(root.get(property))
+        } else {
+          return builder.notEqual(root.get(property), argument)
         }
-
-        return args
+      case GREATER_THAN:
+        return builder.greaterThan(root.<String> get(property), argument.toString())
+      case GREATER_THAN_OR_EQUAL:
+        return builder.greaterThanOrEqualTo(root.<String> get(property), argument.toString())
+      case LESS_THAN:
+        return builder.lessThan(root.<String> get(property), argument.toString())
+      case LESS_THAN_OR_EQUAL:
+        return builder.lessThanOrEqualTo(root.<String> get(property), argument.toString())
+      case IN:
+        return root.get(property).in(args)
+      case NOT_IN:
+        return builder.not(root.get(property).in(args))
     }
 
-    // standard constructor, getter, setter
+    return null
+  }
+
+  private List<Object> castArguments(final Root<T> root) {
+
+    Class<? extends Object> type = root.get(property).getJavaType()
+
+    List<Object> args = arguments.collect { arg ->
+      if (type == Integer.class) {
+        return Integer.parseInt(arg)
+      } else if (type == Long.class) {
+        return Long.parseLong(arg)
+      } else {
+        return arg
+      }
+    }
+
+    return args
+  }
+
+  // standard constructor, getter, setter
 }

@@ -10,25 +10,25 @@ import javax.validation.constraints.Size
  */
 @Entity
 class OrderDetail implements Serializable {
-    @EmbeddedId
-    @AttributeOverrides([
-            @AttributeOverride(name = "orderId", column = @Column(name = "order_id", nullable = false)),
-            @AttributeOverride(name = "productId", column = @Column(name = "product_id", nullable = false))])
-    OrderDetailId id
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, insertable = false, updatable = false)
-    EOrder orders
+  @EmbeddedId
+  @AttributeOverrides([
+    @AttributeOverride(name = "orderId", column = @Column(name = "order_id", nullable = false)),
+    @AttributeOverride(name = "productId", column = @Column(name = "product_id", nullable = false))])
+  OrderDetailId id
 
-    @Size(max = 50)
-    @Column(nullable = false, length = 50)
-    String productName
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(nullable = false, insertable = false, updatable = false)
+  EOrder orders
 
-    @Column(nullable = false)
-    int quantity
+  @Size(max = 50)
+  @Column(nullable = false, length = 50)
+  String productName
 
-    @Column(nullable = false, precision = 10)
-    BigDecimal unitCost
+  @Column(nullable = false)
+  int quantity
+
+  @Column(nullable = false, precision = 10)
+  BigDecimal unitCost
 }
 
 

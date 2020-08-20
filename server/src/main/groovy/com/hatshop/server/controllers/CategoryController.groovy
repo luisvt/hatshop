@@ -4,7 +4,6 @@ import com.hatshop.server.models.Category
 import com.hatshop.server.repositories.CategoryRepository
 import com.hatshop.server.repositories.ProductRepository
 import com.hatshop.server.utils.AbstractRestController
-import com.hatshop.server.utils.ToSerializable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.PathVariable
@@ -22,23 +21,23 @@ import static com.hatshop.server.utils.ToSerializable.toSerializable
 @RestController
 @RequestMapping("categories")
 class CategoryController extends AbstractRestController<Category, Integer> {
-    @Autowired
-    CategoryController(CategoryRepository repo) {
-        super(repo)
-    }
+  @Autowired
+  CategoryController(CategoryRepository repo) {
+    super(repo)
+  }
 
-    @Autowired
-    ProductRepository productRepository
+  @Autowired
+  ProductRepository productRepository
 
-    @RequestMapping('{categoryId}/products')
-    def departmentCategoryProducts(
-            @PathVariable Integer categoryId,
-            @RequestParam(defaultValue = PAGE_NUMBER) int page,
-            @RequestParam(defaultValue = PAGE_SIZE) int size) {
-        toSerializable(size == 0
-                ? productRepository.findAllByCategories_Id(categoryId)
-                : size == 1
-                ? productRepository.findAllByCategories_Id(categoryId, PageRequest.of(page, size))[0]
-                : productRepository.findAllByCategories_Id(categoryId, PageRequest.of(page, size)))
-    }
+  @RequestMapping('{categoryId}/products')
+  def departmentCategoryProducts(
+    @PathVariable Integer categoryId,
+    @RequestParam(defaultValue = PAGE_NUMBER) int page,
+    @RequestParam(defaultValue = PAGE_SIZE) int size) {
+    toSerializable(size == 0
+      ? productRepository.findAllByCategories_Id(categoryId)
+      : size == 1
+      ? productRepository.findAllByCategories_Id(categoryId, PageRequest.of(page, size))[0]
+      : productRepository.findAllByCategories_Id(categoryId, PageRequest.of(page, size)))
+  }
 }

@@ -11,8 +11,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
  * Created by luis on 6/19/15.
  */
 interface CategoryRepository extends JpaRepository<Category, Integer>, JpaSpecificationExecutor<Category> {
-    List<Category> findAllByDepartment_Id(Integer id)
-    List<Category> findAllByDepartment_Id(Integer id, Sort sort)
+  List<Category> findAllByDepartment_Id(Integer id)
 
-    Page<Category> findAllByDepartment_Id(Integer id, Pageable pageable)
+  List<Category> findAllByDepartment_Id(Integer id, Sort sort)
+
+  Page<Category> findAllByDepartment_Id(Integer id, Pageable pageable)
 }

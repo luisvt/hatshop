@@ -12,33 +12,33 @@ import javax.validation.constraints.Size
  */
 @Entity
 class Shipping implements Serializable {
-    @Id
-    @GeneratedValue
-    Integer id
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    ShippingRegion shippingRegion
+  @Id
+  @GeneratedValue
+  Integer id
 
-    @NotEmpty
-    @Size(max = 100)
-    @Column(nullable = false, length = 100)
-    String shippingType
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(nullable = false)
+  ShippingRegion shippingRegion
 
-    @NotNull
-    @Column(nullable = false, precision = 10)
-    BigDecimal shippingCost
+  @NotEmpty
+  @Size(max = 100)
+  @Column(nullable = false, length = 100)
+  String shippingType
 
-    @OneToMany(mappedBy = "shipping")
-    Set<EOrder> orders = new HashSet<EOrder>(0)
+  @NotNull
+  @Column(nullable = false, precision = 10)
+  BigDecimal shippingCost
 
-    Shipping() {}
+  @OneToMany(mappedBy = "shipping")
+  Set<EOrder> orders = new HashSet<EOrder>(0)
 
-    Shipping(String shippingType, BigDecimal shippingCost, ShippingRegion shippingRegion) {
-        this.shippingRegion = shippingRegion
-        this.shippingType = shippingType
-        this.shippingCost = shippingCost
-    }
+  Shipping() {}
+
+  Shipping(String shippingType, BigDecimal shippingCost, ShippingRegion shippingRegion) {
+    this.shippingRegion = shippingRegion
+    this.shippingType = shippingType
+    this.shippingCost = shippingCost
+  }
 }
 
 

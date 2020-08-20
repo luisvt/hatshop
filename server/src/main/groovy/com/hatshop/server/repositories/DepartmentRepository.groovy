@@ -14,6 +14,6 @@ import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphTyp
  */
 interface DepartmentRepository extends JpaRepository<Department, Integer>, JpaSpecificationExecutor<Department> {
 
-    @EntityGraph(value = 'Department.categories', type = LOAD)
-    Page<Department> findAll(Pageable pageable)
+  @EntityGraph(value = 'Department.categories', type = LOAD)
+  Page<Department> findAll(Pageable pageable)
 }

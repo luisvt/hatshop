@@ -9,27 +9,27 @@ import javax.persistence.*
  */
 @Entity
 @NamedEntityGraph(name = "Department.categories",
-    attributeNodes = @NamedAttributeNode("categories"))
+  attributeNodes = @NamedAttributeNode("categories"))
 class Department {
-    Department() {}
+  Department() {}
 
-    Department(String name, String description) {
-        this.name = name
-        this.description = description
-    }
+  Department(String name, String description) {
+    this.name = name
+    this.description = description
+  }
 
-    @Id
-    @GeneratedValue
-    Integer id
+  @Id
+  @GeneratedValue
+  Integer id
 
-    @Column(length = 50)
-    String name
+  @Column(length = 50)
+  String name
 
-    @Column(length = 1000)
-    String description
+  @Column(length = 1000)
+  String description
 
-    @OneToMany(mappedBy = "department")
-    Set<Category> categories = new HashSet<Category>(0)
+  @OneToMany(mappedBy = "department")
+  Set<Category> categories = new HashSet<Category>(0)
 }
 
 

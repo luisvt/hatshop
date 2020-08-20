@@ -17,23 +17,23 @@ import org.springframework.stereotype.Service
 @Service
 class CustomUserDetailsService implements UserDetailsService {
 
-    private static final LOGGER = LoggerFactory.getLogger(CustomUserDetailsService)
+  private static final LOGGER = LoggerFactory.getLogger(CustomUserDetailsService)
 
-    @Autowired
-    private UserRepository userRepository
+  @Autowired
+  private UserRepository userRepository
 
-    @Override
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findOneByUsername(username)
+  @Override
+  UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = userRepository.findOneByUsername(username)
 
-        if (user == null) {
-            String message = "Username not found: " + username
-            LOGGER.info(message)
-            throw new UsernameNotFoundException(message)
-        }
-
-        LOGGER.info("Found user in database: " + user)
-
-        user
+    if (user == null) {
+      String message = "Username not found: " + username
+      LOGGER.info(message)
+      throw new UsernameNotFoundException(message)
     }
+
+    LOGGER.info("Found user in database: " + user)
+
+    user
+  }
 }

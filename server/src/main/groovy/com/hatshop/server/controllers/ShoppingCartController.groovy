@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("shopping-carts")
 class ShoppingCartController extends AbstractRestController<ShoppingCart, Integer> {
-    @Autowired
-    ShoppingCartController(ShoppingCartRepository repo) {
-        super(repo)
-    }
+  @Autowired
+  ShoppingCartController(ShoppingCartRepository repo) {
+    super(repo)
+  }
 }

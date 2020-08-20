@@ -10,28 +10,28 @@ import javax.persistence.Embeddable
  */
 @Embeddable
 class OrderDetailId implements Serializable {
-    @Column(nullable = false)
-    int orderId
+  @Column(nullable = false)
+  int orderId
 
-    @Column(nullable = false)
-    int productId
+  @Column(nullable = false)
+  int productId
 
-    boolean equals(Object other) {
-        if ((this == other)) return true
-        if ((other == null)) return false
-        if (!(other instanceof OrderDetailId)) return false
-        OrderDetailId castOther = (OrderDetailId) other
+  boolean equals(Object other) {
+    if ((this == other)) return true
+    if ((other == null)) return false
+    if (!(other instanceof OrderDetailId)) return false
+    OrderDetailId castOther = (OrderDetailId) other
 
-        return (orderId == castOther.orderId) && (this.productId == castOther.productId)
-    }
+    return (orderId == castOther.orderId) && (this.productId == castOther.productId)
+  }
 
-    int hashCode() {
-        int result = 17
+  int hashCode() {
+    int result = 17
 
-        result = 37 * result + this.getOrderId()
-        result = 37 * result + this.getProductId()
-        return result
-    }
+    result = 37 * result + this.getOrderId()
+    result = 37 * result + this.getProductId()
+    return result
+  }
 }
 
 

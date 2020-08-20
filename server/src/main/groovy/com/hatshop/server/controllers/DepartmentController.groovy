@@ -23,40 +23,40 @@ import static com.hatshop.server.utils.ToSerializable.toSerializable
 @RestController
 @RequestMapping("departments")
 class DepartmentController extends AbstractRestController<Department, Integer> {
-    @Autowired
-    DepartmentController(DepartmentRepository repo) {
-        super(repo)
-    }
+  @Autowired
+  DepartmentController(DepartmentRepository repo) {
+    super(repo)
+  }
 
-    @Autowired
-    ProductRepository productRepository
+  @Autowired
+  ProductRepository productRepository
 
-    @Autowired
-    CategoryRepository categoryRepository
+  @Autowired
+  CategoryRepository categoryRepository
 
-    @RequestMapping('/{id}/products')
-    def departmentProducts(@PathVariable Integer id,
-                           @RequestParam(defaultValue = PAGE_NUMBER) int page,
-                           @RequestParam(defaultValue = PAGE_SIZE) int size,
+  @RequestMapping('/{id}/products')
+  def departmentProducts(@PathVariable Integer id,
+                         @RequestParam(defaultValue = PAGE_NUMBER) int page,
+                         @RequestParam(defaultValue = PAGE_SIZE) int size,
+                         @RequestParam(required = false) List<String> project) {
+    toSerializable(size == 0
+      ? productRepository.findAllByCategories_Department_Id(id)
+      : size == 1
+      ? productRepository.findAllByCategories_Department_Id(id, PageRequest.of(page, size))[0]
+      : productRepository.findAllByCategories_Department_Id(id, PageRequest.of(page, size)),
+      project)
+  }
+
+  @RequestMapping('/{id}/categories')
+  def departmentCategories(@PathVariable Integer id,
+                           @RequestParam(defaultValue = PAGE_NUMBER) Integer page,
+                           @RequestParam(defaultValue = PAGE_SIZE) Integer size,
                            @RequestParam(required = false) List<String> project) {
-        toSerializable(size == 0
-                ? productRepository.findAllByCategories_Department_Id(id)
-                : size == 1
-                ? productRepository.findAllByCategories_Department_Id(id, PageRequest.of(page, size))[0]
-                : productRepository.findAllByCategories_Department_Id(id, PageRequest.of(page, size)),
-                project)
-    }
-
-    @RequestMapping('/{id}/categories')
-    def departmentCategories(@PathVariable Integer id,
-                             @RequestParam(defaultValue = PAGE_NUMBER) Integer page,
-                             @RequestParam(defaultValue = PAGE_SIZE) Integer size,
-                             @RequestParam(required = false) List<String> project) {
-        toSerializable(size == 0
-                ? categoryRepository.findAllByDepartment_Id(id)
-                : size == 1
-                ? categoryRepository.findAllByDepartment_Id(id, PageRequest.of(page, size))[0]
-                : categoryRepository.findAllByDepartment_Id(id, PageRequest.of(page, size)),
-                project)
-    }
+    toSerializable(size == 0
+      ? categoryRepository.findAllByDepartment_Id(id)
+      : size == 1
+      ? categoryRepository.findAllByDepartment_Id(id, PageRequest.of(page, size))[0]
+      : categoryRepository.findAllByDepartment_Id(id, PageRequest.of(page, size)),
+      project)
+  }
 }

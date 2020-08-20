@@ -9,28 +9,28 @@ import javax.validation.constraints.NotNull
  */
 @Entity
 class ShoppingCart implements Serializable {
-    @EmbeddedId
-    @AttributeOverrides([
-            @AttributeOverride(name = "id", column = @Column(name = "id", nullable = false, length = 32)),
-            @AttributeOverride(name = "productId", column = @Column(name = "product_id", nullable = false))])
-    ShoppingCartId id
+  @EmbeddedId
+  @AttributeOverrides([
+    @AttributeOverride(name = "id", column = @Column(name = "id", nullable = false, length = 32)),
+    @AttributeOverride(name = "productId", column = @Column(name = "product_id", nullable = false))])
+  ShoppingCartId id
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, insertable = false, updatable = false)
-    Product product
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(nullable = false, insertable = false, updatable = false)
+  Product product
 
-    @NotNull
-    @Column(nullable = false)
-    Integer quantity
+  @NotNull
+  @Column(nullable = false)
+  Integer quantity
 
-    @NotNull
-    @Column(nullable = false)
-    Boolean buyNow
+  @NotNull
+  @Column(nullable = false)
+  Boolean buyNow
 
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, length = 29)
-    Date addedOn
+  @NotNull
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, length = 29)
+  Date addedOn
 }
 
 

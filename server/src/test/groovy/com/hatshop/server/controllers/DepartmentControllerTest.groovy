@@ -20,22 +20,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class DepartmentControllerTest {
 
-    @Autowired
-    WebApplicationContext wac
+  @Autowired
+  WebApplicationContext wac
 
-    MockMvc mmvc
+  MockMvc mmvc
 
-    @BeforeEach
-    void setUp() {
-        mmvc = MockMvcBuilders.webAppContextSetup(wac).build()
-    }
+  @BeforeEach
+  void setUp() {
+    mmvc = MockMvcBuilders.webAppContextSetup(wac).build()
+  }
 
-    @Test
-    void testDepartmentProducts() throws Exception {
-        mmvc.perform(get("/api/departments/2/products").accept(APPLICATION_JSON))
+  @Test
+  void testDepartmentProducts() throws Exception {
+    mmvc.perform(get("/api/departments/2/products").accept(APPLICATION_JSON))
 //                .andDo(MockMvcResultHandlers.print())
-                .andExpect(jsonPath('items', hasSize(8)))
-                .andExpect(jsonPath('items[0].id', is(18)))
-                .andExpect(jsonPath('items[0].description', startsWith("Uniform Chauffeur Cap.")))
-    }
+      .andExpect(jsonPath('items', hasSize(8)))
+      .andExpect(jsonPath('items[0].id', is(18)))
+      .andExpect(jsonPath('items[0].description', startsWith("Uniform Chauffeur Cap.")))
+  }
 }

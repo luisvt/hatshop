@@ -17,24 +17,24 @@ import static org.springframework.web.method.HandlerTypePredicate.forAnnotation
 @SpringBootApplication
 class HatShopApplication implements WebMvcConfigurer {
 
-    static void main(String[] args) {
-        SpringApplication.run(HatShopApplication, args)
-    }
+  static void main(String[] args) {
+    SpringApplication.run(HatShopApplication, args)
+  }
 
-    @Override
-    void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        for (HttpMessageConverter<?> mc : converters) {
-            if (mc instanceof MappingJackson2HttpMessageConverter
-                    || mc instanceof MappingJackson2XmlHttpMessageConverter) {
-                mc.objectMapper.registerModule(new Hibernate5Module()
-                        .configure(SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true))
-                mc.objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
-            }
-        }
+  @Override
+  void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+    for (HttpMessageConverter<?> mc : converters) {
+      if (mc instanceof MappingJackson2HttpMessageConverter
+        || mc instanceof MappingJackson2XmlHttpMessageConverter) {
+        mc.objectMapper.registerModule(new Hibernate5Module()
+          .configure(SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true))
+        mc.objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
+      }
     }
+  }
 
-    @Override
-    void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix("/api", forAnnotation(RestController))
-    }
+  @Override
+  void configurePathMatch(PathMatchConfigurer configurer) {
+    configurer.addPathPrefix("/api", forAnnotation(RestController))
+  }
 }

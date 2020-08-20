@@ -17,83 +17,83 @@ import static com.hatshop.server.utils.ToSerializable.toSerializable
 
 abstract class AbstractRestController<T, ID extends Serializable> {
 
-    private final Logger logger = LoggerFactory.getLogger(AbstractRestController)
+  private final Logger logger = LoggerFactory.getLogger(AbstractRestController)
 
-    protected final JpaRepository<T, ID> repo
+  protected final JpaRepository<T, ID> repo
 
 
-    AbstractRestController(JpaRepository<T, ID> repo) {
-        this.repo = repo
+  AbstractRestController(JpaRepository<T, ID> repo) {
+    this.repo = repo
+  }
+
+  @GetMapping(value = "/{id}")
+  def findOne(@PathVariable ID id, @RequestParam(required = false) List<String> project) {
+    toSerializable(repo.findById(id).orElseThrow { new ResourceNotFoundException() }, project)
+  }
+
+  @GetMapping(value = "/{id}/{property}")
+  def findProperty(@PathVariable ID id,
+                   @PathVariable String property,
+                   @RequestParam(required = false) List<String> project) {
+    def item = repo.findById(id).orElseThrow { new ResourceNotFoundException() }
+    if (item[property]) {
+      return toSerializable(item[property], project)
+    } else {
+      throw new ResourceNotFoundException()
+    }
+  }
+
+  protected _findAll(page, size, search) {
+    if (search) {
+      def rootNode = new RSQLParser().parse(search)
+      def spec = rootNode.accept(new CustomRsqlVisitor<T>())
+      def repoExecutor = repo as JpaSpecificationExecutor<T>
+      if (size == 0) return repoExecutor.findAll(spec)
+      if (size == 1) return repoExecutor.findOne(spec).orElseThrow(ResourceNotFoundException.&newInstance)
+      return repoExecutor.findAll(spec, PageRequest.of(page, size))
     }
 
-    @GetMapping(value = "/{id}")
-    def findOne(@PathVariable ID id, @RequestParam(required = false) List<String> project) {
-        toSerializable(repo.findById(id).orElseThrow { new ResourceNotFoundException() }, project)
+    if (size == 0) return repo.findAll()
+    if (size == 1) return repo.findAll(PageRequest.of(page, size))[0]
+    repo.findAll(PageRequest.of(page, size))
+  }
+
+  @GetMapping
+  def findAll(@RequestParam(defaultValue = PAGE_NUMBER) Integer page,
+              @RequestParam(defaultValue = PAGE_SIZE) Integer size,
+              @RequestParam(required = false) String search,
+              @RequestParam(required = false) List<String> project) {
+    toSerializable(_findAll(page, size, search), project)
+  }
+
+  @PostMapping
+  def create(@RequestBody T entity, @RequestParam(required = false) List<String> project) {
+    logger.debug("create() with body {} of type {}", entity, entity.getClass())
+
+    toSerializable(repo.save(entity), project)
+  }
+
+
+  @PutMapping("/{id}")
+  def update(@PathVariable ID id, @RequestBody T item, @RequestParam(required = false) List<String> project) {
+    logger.debug("update() of id#{} with body {}", id, item)
+    logger.debug("T json is of type {}", item.getClass())
+
+    T entity = repo.findById(id).orElseThrow { new ResourceNotFoundException() }
+    try {
+      BeanUtils.copyProperties(entity, item)
+    }
+    catch (Exception e) {
+      logger.warn("Error while copying properties", e)
     }
 
-    @GetMapping(value = "/{id}/{property}")
-    def findProperty(@PathVariable ID id,
-                     @PathVariable String property,
-                     @RequestParam(required = false) List<String> project) {
-        def item = repo.findById(id).orElseThrow { new ResourceNotFoundException() }
-        if (item[property]) {
-            return toSerializable(item[property], project)
-        } else {
-            throw new ResourceNotFoundException()
-        }
-    }
+    logger.debug("merged entity: {}", entity)
 
-    protected _findAll(page, size, search) {
-        if (search) {
-            def rootNode = new RSQLParser().parse(search)
-            def spec = rootNode.accept(new CustomRsqlVisitor<T>())
-            def repoExecutor = repo as JpaSpecificationExecutor<T>
-            if (size == 0) return repoExecutor.findAll(spec)
-            if (size == 1) return repoExecutor.findOne(spec).orElseThrow(ResourceNotFoundException.&newInstance)
-            return repoExecutor.findAll(spec, PageRequest.of(page, size))
-        }
+    toSerializable(repo.save(entity), project)
+  }
 
-        if (size == 0) return repo.findAll()
-        if (size == 1) return repo.findAll(PageRequest.of(page, size))[0]
-        repo.findAll(PageRequest.of(page, size))
-    }
-
-    @GetMapping
-    def findAll(@RequestParam(defaultValue = PAGE_NUMBER) Integer page,
-                @RequestParam(defaultValue = PAGE_SIZE) Integer size,
-                @RequestParam(required = false) String search,
-                @RequestParam(required = false) List<String> project) {
-        toSerializable(_findAll(page, size, search), project)
-    }
-
-    @PostMapping
-    def create(@RequestBody T entity, @RequestParam(required = false) List<String> project) {
-        logger.debug("create() with body {} of type {}", entity, entity.getClass())
-
-        toSerializable(repo.save(entity), project)
-    }
-
-
-    @PutMapping("/{id}")
-    def update(@PathVariable ID id, @RequestBody T item, @RequestParam(required = false) List<String> project) {
-        logger.debug("update() of id#{} with body {}", id, item)
-        logger.debug("T json is of type {}", item.getClass())
-
-        T entity = repo.findById(id).orElseThrow { new ResourceNotFoundException() }
-        try {
-            BeanUtils.copyProperties(entity, item)
-        }
-        catch (Exception e) {
-            logger.warn("Error while copying properties", e)
-        }
-
-        logger.debug("merged entity: {}", entity)
-
-        toSerializable(repo.save(entity), project)
-    }
-
-    @DeleteMapping("/{id}")
-    void deleteById(@PathVariable ID id) {
-        repo.deleteById id
-    }
+  @DeleteMapping("/{id}")
+  void deleteById(@PathVariable ID id) {
+    repo.deleteById id
+  }
 }
