@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull
 class Audit {
     @Id
     @GeneratedValue
-    int id
+    Integer id
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,11 +32,11 @@ class Audit {
 
     @NotNull
     @Column(nullable = false)
-    int messageNumber
+    Integer messageNumber
 
     Audit() {}
 
-    Audit(EOrder orders, Date createdOn, String message, int messageNumber) {
+    Audit(EOrder orders, Date createdOn, String message, Integer messageNumber) {
         this.orders = orders
         this.createdOn = createdOn
         this.message = message

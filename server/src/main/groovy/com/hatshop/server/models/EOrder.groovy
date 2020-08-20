@@ -1,6 +1,8 @@
 package com.hatshop.server.models
 
 import javax.persistence.*
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 import static javax.persistence.FetchType.LAZY
 import static javax.persistence.GenerationType.IDENTITY
@@ -10,50 +12,50 @@ import static javax.persistence.TemporalType.TIMESTAMP
 @Entity
 class EOrder implements Serializable {
     @Id
-    @Column(name = "id", unique = true, nullable = false)
-    @GeneratedValue(strategy = IDENTITY)
-    int id
+    @GeneratedValue
+    Integer id
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "customer_id")
     Customer customer
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "shipping_id")
     Shipping shipping
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "tax_id")
     Tax tax
 
-    @Column(name = "total_amount", nullable = false, precision = 10)
+    @NotNull
+    @Column(nullable = false, precision = 10)
     BigDecimal totalAmount
 
+    @NotNull
     @Temporal(TIMESTAMP)
-    @Column(name = "created_on", nullable = false, length = 29)
+    @Column(nullable = false, length = 29)
     Date createdOn
 
     @Temporal(TIMESTAMP)
-    @Column(name = "shipped_on", length = 29)
+    @Column(length = 29)
     Date shippedOn
 
-    @Column(name = "status", nullable = false)
+    @NotNull
+    @Column(nullable = false)
     int status
 
-    @Column(name = "comments")
     String comments
 
-    @Column(name = "auth_code", length = 50)
+    @Size(max = 50)
+    @Column(length = 50)
     String authCode
 
-    @Column(name = "reference", length = 50)
+    @Size(max = 50)
+    @Column(length = 50)
     String reference
 
     @OneToMany(mappedBy = "orders")
-    Set<Audit> audits = new HashSet<Audit>(0)
+    Set<Audit> audits = new HashSet<>(0)
 
     @OneToMany(mappedBy = "orders")
-    Set<OrderDetail> orderDetails = new HashSet<OrderDetail>(0)
+    Set<OrderDetail> orderDetails = new HashSet<>(0)
 }
 
 

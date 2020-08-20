@@ -4,6 +4,7 @@ package com.hatshop.server.models
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 /**
@@ -36,10 +37,12 @@ class Product implements Serializable {
     Integer id
 
     @NotEmpty
+    @Size(max = 1000)
     @Column(nullable = false, length = 50)
     String name
 
     @NotEmpty
+    @Size(max = 1000)
     @Column(nullable = false, length = 1000)
     String description
 
@@ -51,9 +54,11 @@ class Product implements Serializable {
     @Column(nullable = false, precision = 10)
     BigDecimal discountedPrice
 
+    @Size(max = 150)
     @Column(length = 150)
     String image
 
+    @Size(max = 150)
     @Column(length = 150)
     String thumbnail
 

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
 @Profile(['default', 'dev'])
@@ -32,11 +32,11 @@ class InitDb implements CommandLineRunner {
     @Autowired
     TaxRepository taxRepository
 
+    @Autowired
+    PasswordEncoder encoder
+
     @Override
     void run(String... args) throws Exception {
-
-//		def resource = new EncodedResource(new ClassPathResource("_data.sql"))
-//		ScriptUtils.executeSqlScript(dataSource.connection, resource, true, true, '--', ';', '/*', '*/')
 
         def dep1 = new Department('Holiday', 'Prepare for the holidays with our special collection of seasonal hats!'),
             dep2 = new Department('Caps and Berets', 'The perfect hats to wear at work and costume parties!'),
@@ -121,25 +121,24 @@ class InitDb implements CommandLineRunner {
         shippingRepository.saveAll([ship1, ship2, ship3, ship4, ship5, ship6, ship7])
 
         def tax1 = new Tax('Sales Tax at 8.5%', 8.50),
-        tax2 = new Tax('No Tax', 0.00)
+            tax2 = new Tax('No Tax', 0.00)
         taxRepository.saveAll([tax1, tax2])
 
-        def roleUser = new Role("ROLE_USER"),
-            encoder = new BCryptPasswordEncoder()
+        customerRepository.save(new Customer(
+                firstName: 'customer1',
+                lastName: 'customer1',
+                username: 'customer1',
+                password: encoder.encode("password123"),
+                email: 'customer1@email.com',
+                shippingRegion: shipR2,
+                authorities: [new Role("ROLE_CUSTOMER")]))
 
-        customerRepository.saveAll([
-                new Customer(
-                        firstName: 'customer1',
-                        lastName: 'customer1',
-                        username: 'customer1',
-                        password: encoder.encode("password123"),
-                        email: 'customer1@email.com',
-                        shippingRegion: shipR2,
-                        authorities: [roleUser]
-                )
-        ])
-
-        def admin1 = new User('Admin', 'One', 'admin1', 'admin1@email.com', encoder.encode('password123'), [new Role('ROLE_ADMIN')])
-        userRepository.save(admin1)
+        userRepository.save(new User(
+                'Admin',
+                'One',
+                'admin1',
+                'admin1@email.com',
+                encoder.encode('password123'),
+                [new Role('ROLE_ADMIN')]))
     }
 }

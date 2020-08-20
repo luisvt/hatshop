@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails
 
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.Size
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY
 
@@ -28,18 +29,22 @@ class User implements UserDetails {
     String password
 
     @NotEmpty
+    @Size(max = 30)
     @Column(unique = true, nullable = false, length = 30)
     String username
 
     @NotEmpty
+    @Size(max = 50)
     @Column(unique = true, nullable = false, length = 50)
     String email
 
     @NotEmpty
+    @Size(max = 50)
     @Column(nullable = false, length = 50)
     String firstName
 
     @NotEmpty
+    @Size(max = 50)
     @Column(nullable = false, length = 50)
     String lastName
 

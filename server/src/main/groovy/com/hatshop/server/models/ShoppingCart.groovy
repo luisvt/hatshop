@@ -1,6 +1,7 @@
 package com.hatshop.server.models
 
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1
 /**
@@ -18,12 +19,15 @@ class ShoppingCart implements Serializable {
     @JoinColumn(nullable = false, insertable = false, updatable = false)
     Product product
 
+    @NotNull
     @Column(nullable = false)
-    int quantity
+    Integer quantity
 
+    @NotNull
     @Column(nullable = false)
-    boolean buyNow
+    Boolean buyNow
 
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, length = 29)
     Date addedOn

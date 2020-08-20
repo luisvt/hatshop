@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
 
 import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.STACK_TRACE
 
-@RestController
+//@RestController
 class CustomErrorController implements ErrorController {
 
     /**

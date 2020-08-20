@@ -17,16 +17,9 @@ class ShippingRegion implements Serializable {
     ShippingRegion(String shippingRegion) {
         this.shippingRegion = shippingRegion
     }
-
-    ShippingRegion(String shippingRegion, Set<Shipping> shippings, Set<Customer> customers) {
-        this.shippingRegion = shippingRegion
-        this.shippings = shippings
-        this.customers = customers
-    }
-
     @Id
     @GeneratedValue
-    int id
+    Integer id
 
     @NotEmpty
     @Column(nullable = false, length = 100)

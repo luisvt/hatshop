@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 import static com.hatshop.server.utils.ToSerializable.toSerializable
@@ -20,11 +21,8 @@ class SessionUserController {
     @Autowired UserRepository userRepository
 
     @RequestMapping("/session-user")
-    def getSessionUser(@AuthenticationPrincipal User user) {
-//        if(environment.acceptsProfiles('default')) {
-//            return userRepository.findOneByUsername('user1')
-//        }
-        toSerializable user
+    def getSessionUser(@AuthenticationPrincipal User user, @RequestParam(required = false) List<String> project) {
+        toSerializable user, project
     }
 
 }
