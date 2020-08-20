@@ -16,40 +16,40 @@ import static org.springframework.http.HttpMethod.GET
 
 @Configuration
 class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final LOGGER = LoggerFactory.getLogger(SecurityConfig.class)
+  private static final LOGGER = LoggerFactory.getLogger(SecurityConfig.class)
 
-    @Autowired
-    private UserDetailsService userDetailsService
+  @Autowired
+  private UserDetailsService userDetailsService
 
-    @Bean
-    BCryptPasswordEncoder passwordEncoder() { new BCryptPasswordEncoder() }
+  @Bean
+  BCryptPasswordEncoder passwordEncoder() { new BCryptPasswordEncoder() }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        LOGGER.debug('configuring AuthenticationManagerBuilder')
-        auth
-            .userDetailsService(userDetailsService)
-            .passwordEncoder(new BCryptPasswordEncoder())
-    }
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    LOGGER.debug('configuring AuthenticationManagerBuilder')
+    auth
+      .userDetailsService(userDetailsService)
+      .passwordEncoder(passwordEncoder())
+  }
 
-    @Autowired
-    Environment environment
+  @Autowired
+  Environment environment
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        LOGGER.debug('configuring HttpSecurity')
-        http.authorizeRequests()
-                .antMatchers('/', '/index.html', '/assets/**', '/fonts/**').permitAll()
-                .antMatchers(GET, "/api/products/**", '/api/departments/**', '/api/categories/**').permitAll()
-                .antMatchers('/api/session-user').authenticated()
-                .antMatchers('/api/**').hasRole('ADMIN')
-        http.httpBasic()
-                .and().logout().logoutUrl('/api/logout')
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    LOGGER.debug('configuring HttpSecurity')
+    http.authorizeRequests()
+      .antMatchers('/*', '/assets/**', '/fonts/**').permitAll()
+      .antMatchers(GET, "/api/products/**", '/api/departments/**', '/api/categories/**').permitAll()
+      .antMatchers('/api/session-user').authenticated()
+      .antMatchers('/api/**').hasRole('ADMIN')
+    http.httpBasic()
+      .and().logout().logoutUrl('/api/logout')
+      .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 
-        http.authorizeRequests()
-                .antMatchers('/h2-console/**').permitAll()
-        http.headers().frameOptions().disable()
-        http.csrf().ignoringAntMatchers('/h2-console/**')
-    }
+    http.authorizeRequests()
+      .antMatchers('/h2-console/**').permitAll()
+    http.headers().frameOptions().disable()
+    http.csrf().ignoringAntMatchers('/h2-console/**')
+  }
 }
