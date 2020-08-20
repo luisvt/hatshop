@@ -1,7 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
+  {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
+  {
+    path: 'categories',
+    loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule),
+    canActivate: [NgxPermissionsGuard],
+    data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
