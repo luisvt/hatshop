@@ -3,7 +3,7 @@
   <div class="col">{{operation | titlecase}} Category</div>
 </mat-toolbar>
 
-<section class="container py-3">
+<section class="container py-3" *ngIf="(model | keys).length">
   <form #f="ngForm" (ngSubmit)="save(f)">
     <matx-input name="name" [(ngModel)]="model.name" #name="ngModel" label="Name" required
                 maxlength="20">
@@ -14,9 +14,6 @@
                 maxlength="200">
       <matx-errors [field]="description"></matx-errors>
     </matx-textarea>
-
-    <matx-select name="department" [(ngModel)]="model.department" #department="ngModel" label="Department"
-      required displayField="name" [options]="departmentsSvc.findAll()"></matx-select>
 
     <button mat-raised-button color="primary">Save</button>
   </form>

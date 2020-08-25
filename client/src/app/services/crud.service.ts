@@ -21,9 +21,9 @@ export abstract class CrudService<T extends { id?: number }> {
     return params;
   }
 
-  findById(id: string) {
+  findById(id: string, params?) {
     if (!id) { return EMPTY; }
-    return this.http.get<T>(this.baseUrl + '/' + id);
+    return this.http.get<T>(this.baseUrl + '/' + id, {params});
   }
 
   find(params?): Observable<Page<T>> {
@@ -36,8 +36,8 @@ export abstract class CrudService<T extends { id?: number }> {
   }
 
   save(item: T | any) {
-    if (item._id) {
-      return this.http.put<T>(this.baseUrl, item);
+    if (item.id) {
+      return this.http.put<T>(`${this.baseUrl}/${item.id}`, item);
     } else {
       return this.http.post<T>(this.baseUrl, item);
     }

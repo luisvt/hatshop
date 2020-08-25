@@ -7,6 +7,12 @@ const routes: Routes = [
   {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
   {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
   {
+    path: 'departments',
+    loadChildren: () => import('./pages/departments/departments.module').then(m => m.DepartmentsModule),
+    canActivate: [NgxPermissionsGuard],
+    data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
+  },
+  {
     path: 'categories',
     loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule),
     canActivate: [NgxPermissionsGuard],

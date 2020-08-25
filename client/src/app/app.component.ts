@@ -12,6 +12,7 @@ import { GlobalsService } from './services/globals.service';
 export class AppComponent {
   appPages = [
     {title: 'Home', url: '/home', icon: 'home', permissions: []},
+    {title: 'Departments', url: '/departments', icon: 'group_work', permissions: ['ADMIN']},
     {title: 'Categories', url: '/categories', icon: 'category', permissions: ['ADMIN']},
   ];
 

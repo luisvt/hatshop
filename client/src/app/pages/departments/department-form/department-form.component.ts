@@ -2,29 +2,28 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { CategoriesService } from '../../../services/categories.service';
-import { Category } from '../../../models/category';
+import { Department } from '../../../models/department';
 import { DepartmentsService } from '../../../services/departments.service';
+import { CategoriesService } from '../../../services/categories.service';
 
 @Component({
-  selector: 'app-category-form',
-  templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.scss']
+  selector: 'app-department-form',
+  templateUrl: './department-form.component.html',
+  styleUrls: ['./department-form.component.scss']
 })
-export class CategoryFormComponent {
+export class DepartmentFormComponent {
 
   operation: string;
 
-  model: Category | any = {};
+  model: Department | any = {};
 
-  constructor(private svc: CategoriesService,
-              public departmentsSvc: DepartmentsService,
+  constructor(private svc: DepartmentsService,
               private route: ActivatedRoute,
               private location: Location) {
     const id = route.snapshot.params.id;
     this.operation = id ? 'edit' : 'add';
     if (id) {
-      svc.findById(id, {project: 'department'}).subscribe(value => this.model = value);
+      svc.findById(id).subscribe(value => this.model = value);
     }
   }
 

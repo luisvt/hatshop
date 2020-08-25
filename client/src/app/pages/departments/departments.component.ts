@@ -6,30 +6,30 @@ import { MatxPromptController } from 'angular-material-extended';
 import { map, switchMap } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 import { debounceFn } from 'debounce-decorator-ts';
-import { Category } from '../../models/category';
-import { CategoriesService } from '../../services/categories.service';
+import { Department } from '../../models/department';
+import { DepartmentsService } from '../../services/departments.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: 'app-departments',
+  templateUrl: './departments.component.html',
+  styleUrls: ['./departments.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class DepartmentsComponent implements OnInit {
 
   columns = ['name', 'actions'];
 
-  dataSource$: Observable<Category[]>;
+  dataSource$: Observable<Department[]>;
 
   params: any = {};
 
-  page: Page<Category> = {
+  page: Page<Department> = {
     size: 20,
     number: 0
   };
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private svc: CategoriesService,
+              private svc: DepartmentsService,
               private promptCtrl: MatxPromptController) {
     this.dataSource$ = route.queryParams.pipe(switchMap(params => {
       this.params = {...params};
