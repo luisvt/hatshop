@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { Department } from '../../../models/department';
-import { DepartmentsService } from '../../../services/departments.service';
+import { ShippingRegionsService } from '../../../services/shipping-regions.service';
+import { ShippingRegion } from '../../../models/shipping-region';
 
 @Component({
   selector: 'app-department-form',
-  templateUrl: './department-form.component.html',
-  styleUrls: ['./department-form.component.scss']
+  templateUrl: './shipping-region-form.component.html',
+  styleUrls: ['./shipping-region-form.component.scss']
 })
-export class DepartmentFormComponent {
+export class ShippingRegionFormComponent {
 
   operation: string;
 
-  model: Department | any = {};
+  model: ShippingRegion | any = {};
 
-  constructor(private svc: DepartmentsService,
+  constructor(private svc: ShippingRegionsService,
               private route: ActivatedRoute,
               private location: Location) {
     const id = route.snapshot.params.id;

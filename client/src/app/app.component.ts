@@ -14,6 +14,7 @@ export class AppComponent {
     {title: 'Home', url: '/home', icon: 'home', permissions: []},
     {title: 'Departments', url: '/departments', icon: 'group_work', permissions: ['ADMIN']},
     {title: 'Categories', url: '/categories', icon: 'category', permissions: ['ADMIN']},
+    {title: 'Shipping Regions', url: '/shipping-regions', icon: 'category', permissions: ['ADMIN']},
   ];
 
   loggedIn$ = this.globalsSvc.loggedIn$;

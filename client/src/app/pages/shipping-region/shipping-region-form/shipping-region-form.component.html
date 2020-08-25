@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <matx-back-button></matx-back-button>
+  <div class="col">{{operation | titlecase}} Shipping Region</div>
+</mat-toolbar>
+
+<section class="container py-3">
+  <form #f="ngForm" (ngSubmit)="save(f)">
+    <matx-input name="shippingRegion" [(ngModel)]="model.shippingRegion" #shippingRegion="ngModel"
+                label="Shipping Region" required maxlength="20">
+      <matx-errors [field]="shippingRegion"></matx-errors>
+    </matx-input>
+
+    <button mat-raised-button color="primary">Save</button>
+  </form>
+</section>

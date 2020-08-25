@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
   <matx-back-button></matx-back-button>
-  <div class="col">{{operation | titlecase}} Category</div>
+  <div class="col">{{operation | titlecase}} Department</div>
 </mat-toolbar>
 
-<section class="container py-3" *ngIf="(model | keys).length">
+<section class="container py-3">
   <form #f="ngForm" (ngSubmit)="save(f)">
     <matx-input name="name" [(ngModel)]="model.name" #name="ngModel" label="Name" required
                 maxlength="20">

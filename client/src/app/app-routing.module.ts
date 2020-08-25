@@ -18,6 +18,12 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
   },
+  {
+    path: 'shipping-regions',
+    loadChildren: () => import('./pages/shipping-region/shipping-region.module').then(m => m.ShippingRegionModule),
+    canActivate: [NgxPermissionsGuard],
+    data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
+  },
 ];
 
 @NgModule({
