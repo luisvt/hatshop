@@ -64,3 +64,6 @@ client/typings
 # System Files
 .DS_Store
 Thumbs.db
+/server/gradle/wrapper/gradle-wrapper.properties
+/server/gradlew
+/server/gradlew.bat
