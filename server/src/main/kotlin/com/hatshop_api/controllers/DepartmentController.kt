@@ -4,9 +4,9 @@ import com.hatshop_api.models.Department
 import com.hatshop_api.repositories.CategoryRepository
 import com.hatshop_api.repositories.DepartmentRepository
 import com.hatshop_api.repositories.ProductRepository
-import com.hatshop_api.utils.AbstractRestController
 import com.hatshop_api.utils.Constants.PAGE_NUMBER
 import com.hatshop_api.utils.Constants.PAGE_SIZE
+import com.lv_spring.data.rest.jpa.AbstractRestController
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,7 +22,7 @@ class DepartmentController(
 ) : AbstractRestController<Department, Int>(repository) {
 
   @RequestMapping("/{id}/products")
-  fun departmentProducts(
+  fun getDepartmentProducts(
     @PathVariable id: Int,
     @RequestParam(defaultValue = PAGE_NUMBER) page: Int,
     @RequestParam(defaultValue = PAGE_SIZE) size: Int
@@ -33,11 +33,10 @@ class DepartmentController(
   }
 
   @RequestMapping("/{id}/categories")
-  fun departmentCategories(
+  fun getDepartmentCategories(
     @PathVariable id: Int,
     @RequestParam(defaultValue = PAGE_NUMBER) page: Int,
-    @RequestParam(defaultValue = PAGE_SIZE) size: Int,
-    @RequestParam(required = false) project: List<String>
+    @RequestParam(defaultValue = PAGE_SIZE) size: Int
   ): Any? = when (size) {
     0 -> categoryRepository.findAllByDepartmentId(id)
     1 -> categoryRepository.findAllByDepartmentId(id, PageRequest.of(page, size)).elementAt(0)

@@ -30,6 +30,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springframework.data:spring-data-rest-hal-explorer")
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+//  implementation(project(":lv-spring-data-rest-jpa"))
   implementation("com.gitlab.lv_spring:lv-spring-data-rest-jpa:0.0.1-SNAPSHOT")
   implementation("com.github.tennaito:rsql-jpa:2.0.2")
   developmentOnly("org.springframework.boot:spring-boot-devtools")

@@ -1,10 +1,7 @@
 package com.hatshop_api.repositories
 
 import com.hatshop_api.models.ShippingRegion
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor
+import com.lv_spring.data.rest.jpa.JpaRepositoryAndSpecificationExecutor
 
 
-interface ShippingRegionRepository : JpaRepository<ShippingRegion, Int>, JpaSpecificationExecutor<ShippingRegion> {
-
-}
+interface ShippingRegionRepository : JpaRepositoryAndSpecificationExecutor<ShippingRegion, Int>

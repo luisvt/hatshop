@@ -12,7 +12,7 @@ import jakarta.persistence.TemporalType.TIMESTAMP
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import java.math.BigDecimal
-import java.util.Date
+import java.util.*
 
 
 // Generated Jun 19, 2015 2:01:18 AM by Hibernate Tools 4.3.1

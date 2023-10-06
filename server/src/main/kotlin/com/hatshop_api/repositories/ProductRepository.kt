@@ -1,17 +1,16 @@
 package com.hatshop_api.repositories
 
 import com.hatshop_api.models.Product
+import com.lv_spring.data.rest.jpa.JpaRepositoryAndSpecificationExecutor
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
 /**
  * Handles the products data
  * Created by luis on 6/19/15.
  */
-interface ProductRepository : JpaRepository<Product, Int>, JpaSpecificationExecutor<Product> {
+interface ProductRepository : JpaRepositoryAndSpecificationExecutor<Product, Int> {
 
   fun findAllByCategoriesDepartmentId(id: Int): List<Product>
 

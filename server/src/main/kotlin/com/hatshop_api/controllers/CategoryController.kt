@@ -3,9 +3,9 @@ package com.hatshop_api.controllers
 import com.hatshop_api.models.Category
 import com.hatshop_api.repositories.CategoryRepository
 import com.hatshop_api.repositories.ProductRepository
-import com.hatshop_api.utils.AbstractRestController
 import com.hatshop_api.utils.Constants.PAGE_NUMBER
 import com.hatshop_api.utils.Constants.PAGE_SIZE
+import com.lv_spring.data.rest.jpa.AbstractRestController
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

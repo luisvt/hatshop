@@ -1,9 +1,7 @@
 package com.hatshop_api.repositories
 
 import com.hatshop_api.models.Review
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor
+import com.lv_spring.data.rest.jpa.JpaRepositoryAndSpecificationExecutor
 
 
-interface ReviewRepository : JpaRepository<Review, Int>, JpaSpecificationExecutor<Review> {
-}
+interface ReviewRepository : JpaRepositoryAndSpecificationExecutor<Review, Int>
