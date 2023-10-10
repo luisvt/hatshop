@@ -63,7 +63,8 @@ class SecurityConfig(
         logoutUrl = "/api/logout"
       }
       csrf {
-        csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse()
+        disable()
+//        csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse()
 //        ignoringRequestMatchers("/h2-console/**")
       }
       headers {

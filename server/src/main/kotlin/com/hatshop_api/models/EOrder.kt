@@ -59,10 +59,10 @@ class EOrder(
   var reference: String,
 
   @OneToMany(mappedBy = "orders")
-  var audits: Set<Audit> = HashSet(0),
+  var audits: MutableSet<Audit> = HashSet(0),
 
   @OneToMany(mappedBy = "orders")
-  var orderDetails: Set<OrderDetail> = HashSet(0),
+  var orderDetails: MutableSet<OrderDetail> = HashSet(0),
 )
 
 

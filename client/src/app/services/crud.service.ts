@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { Page } from '../models/page';
 import { map } from 'rxjs/operators';
 import { EMPTY, Observable } from 'rxjs';
+import { Params } from '@angular/router';
+
 
 export abstract class CrudService<T extends { id?: number }> {
   protected readonly baseUrl: string;
@@ -11,8 +13,8 @@ export abstract class CrudService<T extends { id?: number }> {
     this.baseUrl = environment.api + baseUrl;
   }
 
-  protected stringifyParams(params) {
-    params = Object.assign({}, {limit: 0}, params);
+  protected stringifyParams(params: any) {
+    params = Object.assign({}, {size: 0}, params);
     for (const key of Object.keys(params)) {
       if (typeof params[key] !== 'string' && typeof params[key] !== 'number') {
         params[key] = JSON.stringify(params[key]);
@@ -21,18 +23,18 @@ export abstract class CrudService<T extends { id?: number }> {
     return params;
   }
 
-  findById(id: string, params?) {
+  findById(id: string, params?: any) {
     if (!id) { return EMPTY; }
     return this.http.get<T>(this.baseUrl + '/' + id, {params});
   }
 
-  find(params?): Observable<Page<T>> {
+  find(params?: any) {
     params = this.stringifyParams(params);
-    return this.http.get<any>(this.baseUrl, {params});
+    return this.http.get<Page<T>>(this.baseUrl, {params});
   }
 
-  findAll(params?) {
-    return this.find(params).pipe(map(itemsPage => itemsPage.items));
+  findAll(params?: Params) {
+    return this.http.get<T[]>(this.baseUrl, {params})
   }
 
   save(item: T | any) {
@@ -47,7 +49,7 @@ export abstract class CrudService<T extends { id?: number }> {
     return this.http.delete(this.baseUrl + '/' + id);
   }
 
-  delete(params) {
+  delete(params: any) {
     return this.http.delete(this.baseUrl, {params});
   }
 }

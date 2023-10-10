@@ -61,7 +61,7 @@ class InitDb(
       "ChristmasCandyHat.jpg",
       "ChristmasCandyHat.thumb.jpg",
       0,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod2 = Product(
       "Hanukah Hat",
@@ -71,7 +71,7 @@ class InitDb(
       "HanukahHat.jpg",
       "HanukahHat.thumb.jpg",
       2,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod3 = Product(
       "Springy Santa Hat",
@@ -81,7 +81,7 @@ class InitDb(
       "SpringySantaHat.jpg",
       "SpringySantaHat.thumb.jpg",
       0,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod4 = Product(
       "Plush Santa Hat",
@@ -91,7 +91,7 @@ class InitDb(
       "PlushSantaHat.jpg",
       "PlushSantaHat.thumb.jpg",
       0,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod5 = Product(
       "Red Santa Cowboy Hat",
@@ -101,7 +101,7 @@ class InitDb(
       "RedSantaCowboyHat.jpg",
       "RedSantaCowboyHat.thumb.jpg",
       0,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod6 = Product(
       "Santa Jester Hat",
@@ -111,7 +111,7 @@ class InitDb(
       "SantaJesterHat.jpg",
       "SantaJesterHat.thumb.jpg",
       0,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod7 = Product(
       "Santa's Elf Hat",
@@ -121,7 +121,7 @@ class InitDb(
       "Santa'sElfHat.jpg",
       "Santa'sElfHat.thumb.jpg",
       1,
-      setOf(cat1)
+      mutableSetOf(cat1)
     )
     val prod8 = Product(
       "Chauffeur Hat",
@@ -131,7 +131,7 @@ class InitDb(
       "ChauffeurHat.jpg",
       "ChauffeurHat.thumb.jpg",
       0,
-      setOf(cat2, cat5)
+      mutableSetOf(cat2, cat5)
     )
     val prod9 = Product(
       "The Pope Hat",
@@ -141,7 +141,7 @@ class InitDb(
       "ThePopeHat.jpg",
       "ThePopeHat.thumb.jpg",
       0,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod10 = Product(
       "Vinyl Policeman Cop Hat",
@@ -151,7 +151,7 @@ class InitDb(
       "VinylPolicemanCopHat.jpg",
       "VinylPolicemanCopHat.thumb.jpg",
       0,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod11 = Product(
       "Burgundy Kings Crown",
@@ -161,7 +161,7 @@ class InitDb(
       "BurgandyKingsCrown.jpg",
       "BurgandyKingsCrown.thumb.jpg",
       2,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod12 = Product(
       "454 Black Pirate Hat",
@@ -171,7 +171,7 @@ class InitDb(
       "454BlackPirateHat.jpg",
       "454BlackPirateHat.thumb.jpg",
       0,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod13 = Product(
       "Black Puritan Hat",
@@ -181,7 +181,7 @@ class InitDb(
       "BlackPuritanHat.jpg",
       "BlackPuritanHat.thumb.jpg",
       2,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod14 = Product(
       "Professor McGonagall Witch Hat",
@@ -191,7 +191,7 @@ class InitDb(
       "ProfessorMcGonagallWitchHat.jpg",
       "ProfessorMcGonagallWitchHat.thumb.jpg",
       0,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod15 = Product(
       "Black Wizard Hat",
@@ -201,7 +201,7 @@ class InitDb(
       "BlackWizardHat.jpg",
       "BlackWizardHat.thumb.jpg",
       0,
-      setOf(cat2)
+      mutableSetOf(cat2)
     )
     val prod16 = Product(
       "Leprechaun Hat",
@@ -211,7 +211,7 @@ class InitDb(
       "LeprechaunHat.jpg",
       "LeprechaunHat.thumb.jpg",
       0,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod17 = Product(
       "9 Green MadHatter Top Hat",
@@ -221,7 +221,7 @@ class InitDb(
       "9GreenMadHatterTopHat.jpg",
       "9GreenMadHatterTopHat.thumb.jpg",
       2,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod18 = Product(
       "Winter Walking Hat",
@@ -231,7 +231,7 @@ class InitDb(
       "WinterWalkingHat.jpg",
       "WinterWalkingHat.thumb.jpg",
       0,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod19 = Product(
       "Green MadHatter Hat",
@@ -241,7 +241,7 @@ class InitDb(
       "GreenMadHatterHat.jpg",
       "GreenMadHatterHat.thumb.jpg",
       2,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod20 = Product(
       "Hole in One Golf Costume Hat",
@@ -251,7 +251,7 @@ class InitDb(
       "HoleinOneGolfCostumeHat.jpg",
       "HoleinOneGolfCostumeHat.thumb.jpg",
       0,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod21 = Product(
       "Luck of the Irish Bowler",
@@ -261,7 +261,7 @@ class InitDb(
       "LuckoftheIrishBowler.jpg",
       "LuckoftheIrishBowler.thumb.jpg",
       0,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod22 = Product(
       "St. Patrick's Irish Green Derby",
@@ -271,7 +271,7 @@ class InitDb(
       "St.Patrick'sIrishGreenDerby.jpg",
       "St.Patrick'sIrishGreenDerby.thumb.jpg",
       0,
-      setOf(cat3)
+      mutableSetOf(cat3)
     )
     val prod23 = Product(
       "Black Basque Beret",
@@ -281,7 +281,7 @@ class InitDb(
       "BlackBasqueBeret.jpg",
       "BlackBasqueBeret.thumb.jpg",
       0,
-      setOf(cat4)
+      mutableSetOf(cat4)
     )
     val prod24 = Product(
       "Cotton Beret",
@@ -291,7 +291,7 @@ class InitDb(
       "CottonBeret.jpg",
       "CottonBeret.thumb.jpg",
       2,
-      setOf(cat4)
+      mutableSetOf(cat4)
     )
     val prod25 = Product(
       "Wool Beret",
@@ -301,7 +301,7 @@ class InitDb(
       "WoolBeret.jpg",
       "WoolBeret.thumb.jpg",
       0,
-      setOf(cat4)
+      mutableSetOf(cat4)
     )
     val prod26 = Product(
       "Military Beret",
@@ -311,7 +311,7 @@ class InitDb(
       "MilitaryBeret.jpg",
       "MilitaryBeret.thumb.jpg",
       3,
-      setOf(cat4, cat7)
+      mutableSetOf(cat4, cat7)
     )
     val prod27 = Product(
       "Bond-Leather Driver",
@@ -321,7 +321,7 @@ class InitDb(
       "Bond-LeatherDriver.jpg",
       "Bond-LeatherDriver.thumb.jpg",
       0,
-      setOf(cat5)
+      mutableSetOf(cat5)
     )
     val prod28 = Product(
       "Moleskin Driver",
@@ -331,7 +331,7 @@ class InitDb(
       "MoleskinDriver.jpg",
       "MoleskinDriver.thumb.jpg",
       2,
-      setOf(cat5)
+      mutableSetOf(cat5)
     )
     val prod29 = Product(
       "Herringbone English Driver",
@@ -341,7 +341,7 @@ class InitDb(
       "HerringboneEnglishDriver.jpg",
       "HerringboneEnglishDriver.thumb.jpg",
       0,
-      setOf(cat5)
+      mutableSetOf(cat5)
     )
     val prod30 = Product(
       "Confederate Civil War Kepi",
@@ -351,7 +351,7 @@ class InitDb(
       "ConfederateCivilWarKepi.jpg",
       "ConfederateCivilWarKepi.thumb.jpg",
       0,
-      setOf(cat6)
+      mutableSetOf(cat6)
     )
     val prod31 = Product(
       "Hillbilly Hat",
@@ -361,7 +361,7 @@ class InitDb(
       "HillbillyHat.jpg",
       "HillbillyHat.thumb.jpg",
       2,
-      setOf(cat6)
+      mutableSetOf(cat6)
     )
     val prod32 = Product(
       "Mother Goose Hat",
@@ -371,7 +371,7 @@ class InitDb(
       "MotherGooseHat.jpg",
       "MotherGooseHat.thumb.jpg",
       0,
-      setOf(cat6)
+      mutableSetOf(cat6)
     )
     val prod33 = Product(
       "Uncle Sam Top Hat",
@@ -381,7 +381,7 @@ class InitDb(
       "UncleSamTopHat.jpg",
       "UncleSamTopHat.thumb.jpg",
       2,
-      setOf(cat6)
+      mutableSetOf(cat6)
     )
     val prod34 = Product(
       "Velvet Sombrero Hat",
@@ -391,7 +391,7 @@ class InitDb(
       "VelvetSombreroHat.jpg",
       "VelvetSombreroHat.thumb.jpg",
       0,
-      setOf(cat6)
+      mutableSetOf(cat6)
     )
     val prod35 = Product(
       "Conductor Hat",
@@ -401,7 +401,7 @@ class InitDb(
       "ConductorHat.jpg",
       "ConductorHat.thumb.jpg",
       0,
-      setOf(cat6)
+      mutableSetOf(cat6)
     )
     val prod36 = Product(
       "Traditional Colonial Tricorn Hat",
@@ -411,7 +411,7 @@ class InitDb(
       "TraditionalColonialTricornHat.jpg",
       "TraditionalColonialTricornHat.thumb.jpg",
       0,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod37 = Product(
       "Metal Viking Helmet",
@@ -421,7 +421,7 @@ class InitDb(
       "MetalVikingHelmet.jpg",
       "MetalVikingHelmet.thumb.jpg",
       2,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod38 = Product(
       "Confederate Slouch Hat",
@@ -431,7 +431,7 @@ class InitDb(
       "ConfederateSlouchHat.jpg",
       "ConfederateSlouchHat.thumb.jpg",
       1,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod39 = Product(
       "Campaign Hat",
@@ -441,7 +441,7 @@ class InitDb(
       "CampaignHat.jpg",
       "CampaignHat.thumb.jpg",
       0,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod40 = Product(
       "Civil War Union Slouch Hat",
@@ -451,7 +451,7 @@ class InitDb(
       "CivilWarUnionSlouchHat.jpg",
       "CivilWarUnionSlouchHat.thumb.jpg",
       0,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod41 = Product(
       "Civil War Leather Kepi Cap",
@@ -461,7 +461,7 @@ class InitDb(
       "CivilWarLeatherKepiCap.jpg",
       "CivilWarLeatherKepiCap.thumb.jpg",
       0,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod42 = Product(
       "Cavalier Hat - Three Musketeers",
@@ -471,7 +471,7 @@ class InitDb(
       "CavalierHat-ThreeMusketeers.jpg",
       "CavalierHat-ThreeMusketeers.thumb.jpg",
       1,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod43 = Product(
       "Hussar Military Hat",
@@ -481,7 +481,7 @@ class InitDb(
       "HussarMilitaryHat.jpg",
       "HussarMilitaryHat.thumb.jpg",
       0,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod44 = Product(
       "Union Civil War Kepi Cap",
@@ -491,7 +491,7 @@ class InitDb(
       "UnionCivilWarKepiCap.jpg",
       "UnionCivilWarKepiCap.thumb.jpg",
       2,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     val prod45 = Product(
       "Tarbucket Helmet Military Hat",
@@ -501,7 +501,7 @@ class InitDb(
       "TarbucketHelmetMilitaryHat.jpg",
       "TarbucketHelmetMilitaryHat.thumb.jpg",
       0,
-      setOf(cat7)
+      mutableSetOf(cat7)
     )
     productRepository.saveAll(
       listOf(
@@ -539,7 +539,7 @@ class InitDb(
         "customer1",
         "customer1@email.com",
         encoder.encode("password123"),
-        mutableListOf(Role("ROLE_CUSTOMER")),
+        mutableSetOf(Role("ROLE_CUSTOMER")),
         shipR2
       )
     )
@@ -551,7 +551,7 @@ class InitDb(
         "admin1",
         "admin1@email.com",
         encoder.encode("password123"),
-        mutableListOf(Role("ROLE_ADMIN"))
+        mutableSetOf(Role("ROLE_ADMIN"))
       )
     )
   }

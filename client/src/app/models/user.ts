@@ -5,7 +5,7 @@ export interface User {
   firstName: string;
   lastName: string;
   username: string;
-  authorities: Role[];
+  roles: Role[];
   accountNonExpired: boolean,
   accountNonLocked: boolean,
   credentialsNonExpired: boolean,

@@ -29,7 +29,7 @@ class Category(
     joinColumns = [JoinColumn(name = "category_id", nullable = false, updatable = false)],
     inverseJoinColumns = [JoinColumn(name = "product_id", nullable = false, updatable = false)]
   )
-  var products: Set<Product>? = HashSet(0),
+  var products: MutableSet<Product>? = HashSet(0),
 
   @Id
   @GeneratedValue

@@ -16,7 +16,7 @@
     </matx-textarea>
 
     <matx-select name="department" [(ngModel)]="model.department" #department="ngModel" label="Department"
-      required displayField="name" [options]="departmentsSvc.findAll()"></matx-select>
+      required displayField="name" [options]="departments$" compareField="id"></matx-select>
 
     <button mat-raised-button color="primary">Save</button>
   </form>

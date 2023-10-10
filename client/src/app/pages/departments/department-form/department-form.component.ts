@@ -19,7 +19,7 @@ export class DepartmentFormComponent {
   constructor(private svc: DepartmentsService,
               private route: ActivatedRoute,
               private location: Location) {
-    const id = route.snapshot.params.id;
+    const id = route.snapshot.params['id'];
     this.operation = id ? 'edit' : 'add';
     if (id) {
       svc.findById(id).subscribe(value => this.model = value);

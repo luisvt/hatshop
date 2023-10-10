@@ -53,13 +53,13 @@ class Product(
     joinColumns = [JoinColumn(name = "product_id", nullable = false, updatable = false)],
     inverseJoinColumns = [JoinColumn(name = "category_id", nullable = false, updatable = false)]
   )
-  var categories: Set<Category> = HashSet(0),
+  var categories: MutableSet<Category> = HashSet(0),
 
   @OneToMany(mappedBy = "product")
-  var reviews: Set<Review> = HashSet(0),
+  var reviews: MutableSet<Review> = HashSet(0),
 
   @OneToMany(mappedBy = "product")
-  var shoppingCarts: Set<ShoppingCart> = HashSet(0),
+  var shoppingCarts: MutableSet<ShoppingCart> = HashSet(0),
 
   @Id
   @GeneratedValue

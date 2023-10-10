@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatxModule } from 'angular-material-extended';
+import { MatxMenuButtonModule } from 'matx-core';
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import { MatxModule } from 'angular-material-extended';
     CommonModule,
     HomeRoutingModule,
     MatToolbarModule,
-    MatxModule
+    MatxMenuButtonModule
   ]
 })
-export class HomeModule { }
+export class HomeModule {}

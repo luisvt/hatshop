@@ -22,7 +22,7 @@ class Tax(
   var taxPercentage: BigDecimal,
 
   @OneToMany(mappedBy = "tax")
-  var orders: Set<EOrder> = HashSet(0),
+  var orders: MutableSet<EOrder> = HashSet(0),
 
   @Id
   @GeneratedValue

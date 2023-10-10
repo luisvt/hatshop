@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class GlobalsService {
 
-  currentUser$ = new ReplaySubject<User>(1);
+  currentUser$ = new ReplaySubject<User | null>(1);
 
   get currentUser() {
     return this.currentUser$.pipe(take(1)).toPromise();

@@ -1,22 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MatxModule } from 'angular-material-extended';
-import { NgxPermissionsModule } from 'ngx-permissions';
-import { CookieService } from 'ngx-cookie-service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { GlobalsService } from './services/globals.service';
-import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
-import { XRequestWithInterceptor } from './interceptors/x-request-with.interceptor';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
+import { GlobalsService } from './services/globals.service';
+import { XRequestWithInterceptor } from './interceptors/x-request-with.interceptor';
+import { MatxPromptModule } from 'matx-core';
 
 @NgModule({
   declarations: [
@@ -28,12 +28,12 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     HttpClientModule,
     NgxPermissionsModule.forRoot(),
-    MatxModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
     MatIconModule,
     MatSnackBarModule,
+    MatxPromptModule
   ],
   providers: [
     CookieService,
@@ -44,7 +44,7 @@ import { MatIconModule } from '@angular/material/icon';
       deps: [MatSnackBar, Router, GlobalsService]
     },
     {provide: HTTP_INTERCEPTORS, useClass: XRequestWithInterceptor, multi: true}
-    ],
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

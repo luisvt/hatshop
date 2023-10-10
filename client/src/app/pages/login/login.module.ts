@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatxModule } from 'angular-material-extended';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatxErrorsModule, MatxInputModule, MatxMenuButtonModule } from 'matx-core';
 
 
 @NgModule({
@@ -15,9 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     LoginRoutingModule,
     MatToolbarModule,
-    MatxModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatxMenuButtonModule,
+    MatxInputModule,
+    MatxErrorsModule
   ]
 })
 export class LoginModule { }

@@ -7,10 +7,10 @@ import org.springframework.security.core.GrantedAuthority
 
 @Entity
 class Role(
-  private val authority: String,
+  val role: String,
   @Id
   @GeneratedValue
   var id: Int? = null,
 ) : GrantedAuthority {
-  override fun getAuthority(): String = authority
+  override fun getAuthority(): String = role
 }

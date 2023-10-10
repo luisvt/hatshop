@@ -19,7 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-open class EUser(
+class EUser(
   @NotEmpty
   @Size(max = 50)
   @Column(nullable = false, length = 50)
@@ -28,7 +28,7 @@ open class EUser(
   @NotEmpty
   @Size(max = 50)
   @Column(nullable = false, length = 50)
-  open var lastName: String,
+  var lastName: String,
 
   @NotEmpty
   @Size(max = 30)
@@ -46,7 +46,7 @@ open class EUser(
   private var password: String,
 
   @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-  private var authorities: MutableCollection<Role>,
+  open var roles: MutableSet<Role>,
 
   private var accountNonExpired: Boolean = true,
 
@@ -60,7 +60,7 @@ open class EUser(
   @GeneratedValue
   open var id: Int? = null,
 ) : UserDetails {
-  override fun getAuthorities(): MutableCollection<out GrantedAuthority> = authorities
+  override fun getAuthorities(): MutableCollection<out GrantedAuthority> = roles
 
   override fun getPassword(): String = password
 

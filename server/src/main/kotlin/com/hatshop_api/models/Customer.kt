@@ -16,7 +16,7 @@ class Customer(
   username: String,
   email: String,
   password: String,
-  authorities: MutableCollection<Role>,
+  roles: MutableSet<Role>,
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
@@ -54,8 +54,8 @@ class Customer(
   var mobPhone: String? = null,
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-  var orders: Set<EOrder> = HashSet(0),
+  var orders: MutableSet<EOrder> = HashSet(0),
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-  var reviews: Set<Review> = HashSet(0),
-) : EUser(firstName, lastName, username, email, password, authorities, id = id)
+  var reviews: MutableSet<Review> = HashSet(0),
+) : EUser(firstName, lastName, username, email, password, roles, id = id)

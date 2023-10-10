@@ -4,9 +4,15 @@ import { CommonModule } from '@angular/common';
 import { CategoryFormRoutingModule } from './category-form-routing.module';
 import { CategoryFormComponent } from './category-form.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatxModule } from 'angular-material-extended';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import {
+  MatxBackButtonModule,
+  MatxErrorsModule,
+  MatxInputModule,
+  MatxSelectModule,
+  MatxTextareaModule
+} from 'matx-core';
 
 
 @NgModule({
@@ -15,9 +21,13 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     CategoryFormRoutingModule,
     MatToolbarModule,
-    MatxModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatxBackButtonModule,
+    MatxInputModule,
+    MatxErrorsModule,
+    MatxTextareaModule,
+    MatxSelectModule
   ]
 })
 export class CategoryFormModule { }

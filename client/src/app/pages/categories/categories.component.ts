@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Page } from '../../models/page';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatxPromptController } from 'angular-material-extended';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatxPromptService } from 'matx-core';
 import { map, switchMap } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 import { debounceFn } from 'debounce-decorator-ts';
@@ -30,20 +30,20 @@ export class CategoriesComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private svc: CategoriesService,
-              private promptCtrl: MatxPromptController) {
+              private promptCtrl: MatxPromptService) {
     this.dataSource$ = route.queryParams.pipe(switchMap(params => {
       this.params = {...params};
       delete this.params._refresh;
-      const page = Number(params.page);
-      const limit = Number(params.limit);
+      const page = Number(params['page']);
+      const size = Number(params['size']);
       const _params = {
-        search: `name==*${params.search || ''}*`,
+        search: `name==*${params['search'] || ''}*`,
         page: page && page > 0 ? page : 0,
-        limit: limit && limit > 0 ? limit : 20
+        size: size && size > 0 ? size : 20
       };
       return this.svc.find(_params).pipe(map(_page => {
         this.page = _page;
-        return _page.items;
+        return _page.content ?? [];
       }));
     }));
   }
@@ -51,12 +51,12 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
   }
 
-  navigate(params) {
+  navigate(params: Params) {
     this.router.navigate([], {relativeTo: this.route, queryParams: params});
   }
 
   handlePageChange(event: PageEvent) {
-    this.navigate({...this.params, page: event.pageIndex + 1, limit: event.pageSize});
+    this.navigate({...this.params, page: event.pageIndex + 1, size: event.pageSize});
   }
 
   @debounceFn(500)
@@ -75,7 +75,7 @@ export class CategoriesComponent implements OnInit {
   deleteById(id: any) {
     this.promptCtrl.prompt({
       message: 'Are you sure you want to delete this item?',
-      actions: ['No', {
+      actions: [{text: 'No', color: undefined}, {
         text: 'Yes',
         color: 'warn',
         showLoading: true,

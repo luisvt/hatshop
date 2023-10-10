@@ -13,7 +13,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               private router: Router,
               private globalsSvc: GlobalsService) {}
 
-  private async showError(error) {
+  private async showError(error: string) {
     this.snackBar.open(error, 'OK', {duration: 5000, panelClass: 'mat-warn'});
   }
 
@@ -34,7 +34,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (error.error.errors) {
           const errors = Object.values(error.error.errors);
           if (errors.length === 1) {
-            this.showError(errors[0]);
+            this.showError(errors[0] as string);
           } else {
             this.showError(errors.join('\n'));
           }

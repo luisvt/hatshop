@@ -15,7 +15,7 @@ class Department(
   var description: String,
 
   @OneToMany(mappedBy = "department")
-  var categories: Set<Category>? = HashSet(0),
+  var categories: MutableSet<Category>? = HashSet(0),
 
   @Id
   @GeneratedValue

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatxSidenavMenuController } from 'angular-material-extended';
 import { AuthService } from './services/auth.service';
 import { GlobalsService } from './services/globals.service';
+import { MatxSidenavMenuService } from 'matx-core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   appPages = [
@@ -20,7 +20,7 @@ export class AppComponent {
   loggedIn$ = this.globalsSvc.loggedIn$;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              public sideNavCtrl: MatxSidenavMenuController,
+              public sideNavCtrl: MatxSidenavMenuService,
               private globalsSvc: GlobalsService,
               public authSvc: AuthService) {
     this.breakpointObserver.observe([

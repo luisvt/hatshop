@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { CategoriesService } from '../../../services/categories.service';
 import { Category } from '../../../models/category';
 import { DepartmentsService } from '../../../services/departments.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category-form',
@@ -17,14 +18,16 @@ export class CategoryFormComponent {
 
   model: Category | any = {};
 
+  departments$ = this.departmentsSvc.findAll() as any
+
   constructor(private svc: CategoriesService,
               public departmentsSvc: DepartmentsService,
               private route: ActivatedRoute,
               private location: Location) {
-    const id = route.snapshot.params.id;
+    const id = route.snapshot.params['id'];
     this.operation = id ? 'edit' : 'add';
     if (id) {
-      svc.findById(id, {project: 'department'}).subscribe(value => this.model = value);
+      svc.findById(id, {$expand: 'department'}).subscribe(value => this.model = value);
     }
   }
 

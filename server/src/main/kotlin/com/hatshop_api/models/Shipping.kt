@@ -29,7 +29,7 @@ class Shipping(
   var shippingRegion: ShippingRegion,
 
   @OneToMany(mappedBy = "shipping")
-  var orders: Set<EOrder> = HashSet(0),
+  var orders: MutableSet<EOrder> = HashSet(0),
 
   @Id
   @GeneratedValue

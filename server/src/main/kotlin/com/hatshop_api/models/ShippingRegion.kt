@@ -14,10 +14,10 @@ class ShippingRegion(
   var shippingRegion: String,
 
   @OneToMany(mappedBy = "shippingRegion")
-  var shippings: Set<Shipping> = HashSet(0),
+  var shippings: MutableSet<Shipping> = HashSet(0),
 
   @OneToMany(mappedBy = "shippingRegion")
-  var customers: Set<Customer> = HashSet(0),
+  var customers: MutableSet<Customer> = HashSet(0),
 
   @Id
   @GeneratedValue

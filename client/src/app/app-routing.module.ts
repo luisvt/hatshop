@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { NgxPermissionsGuard } from 'ngx-permissions';
+import { RouterModule, Routes } from '@angular/router';
+import { ngxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -9,19 +9,19 @@ const routes: Routes = [
   {
     path: 'departments',
     loadChildren: () => import('./pages/departments/departments.module').then(m => m.DepartmentsModule),
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [ngxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
   },
   {
     path: 'categories',
     loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule),
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [ngxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
   },
   {
     path: 'shipping-regions',
     loadChildren: () => import('./pages/shipping-region/shipping-region.module').then(m => m.ShippingRegionModule),
-    canActivate: [NgxPermissionsGuard],
+    canActivate: [ngxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
   },
 ];
