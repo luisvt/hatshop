@@ -11,13 +11,13 @@ import jakarta.validation.constraints.NotEmpty
 class ShippingRegion(
   @NotEmpty
   @Column(nullable = false, length = 100)
-  var shippingRegion: String,
+  var shippingRegion: String?,
 
   @OneToMany(mappedBy = "shippingRegion")
-  var shippings: MutableSet<Shipping> = HashSet(0),
+  var shippings: MutableSet<Shipping>? = mutableSetOf(),
 
   @OneToMany(mappedBy = "shippingRegion")
-  var customers: MutableSet<Customer> = HashSet(0),
+  var customers: MutableSet<Customer>? = mutableSetOf(),
 
   @Id
   @GeneratedValue

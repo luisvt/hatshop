@@ -8,10 +8,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler
 
 @Configuration
 @EnableWebSecurity
@@ -65,8 +67,12 @@ class SecurityConfig(
       csrf {
         disable()
 //        csrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse()
+//        csrfTokenRequestHandler = CsrfTokenRequestAttributeHandler()
 //        ignoringRequestMatchers("/h2-console/**")
       }
+//      sessionManagement {
+//        sessionCreationPolicy = SessionCreationPolicy.STATELESS
+//      }
       headers {
         frameOptions { disable() }
       }

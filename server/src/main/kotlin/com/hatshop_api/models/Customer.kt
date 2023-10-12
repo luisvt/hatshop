@@ -11,16 +11,16 @@ import jakarta.persistence.OneToMany
 
 @Entity
 class Customer(
-  firstName: String,
-  lastName: String,
-  username: String,
-  email: String,
-  password: String,
-  roles: MutableSet<Role>,
+  firstName: String?,
+  lastName: String?,
+  username: String?,
+  email: String?,
+  password: String?,
+  roles: MutableSet<Role>?,
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
-  var shippingRegion: ShippingRegion,
+  var shippingRegion: ShippingRegion?,
 
   id: Int? = null,
   @Column(length = 30)

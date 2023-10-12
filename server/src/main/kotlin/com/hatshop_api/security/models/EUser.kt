@@ -23,30 +23,31 @@ class EUser(
   @NotEmpty
   @Size(max = 50)
   @Column(nullable = false, length = 50)
-  open var firstName: String,
+  var firstName: String?,
 
   @NotEmpty
   @Size(max = 50)
   @Column(nullable = false, length = 50)
-  var lastName: String,
+  var lastName: String?,
 
   @NotEmpty
   @Size(max = 30)
   @Column(unique = true, nullable = false, length = 30)
-  private var username: String,
+  @get:JvmName("getUsername_")
+  var username: String?,
 
   @NotEmpty
   @Size(max = 50)
   @Column(unique = true, nullable = false, length = 50)
-  open var email: String,
+  var email: String?,
 
   @NotEmpty
   @Column(nullable = false, length = 100)
   @JsonProperty(access = WRITE_ONLY)
-  private var password: String,
+  private var password: String?,
 
-  @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-  open var roles: MutableSet<Role>,
+  @ManyToMany(fetch = FetchType.EAGER)
+  var roles: MutableSet<Role>? = mutableSetOf(),
 
   private var accountNonExpired: Boolean = true,
 
@@ -58,13 +59,13 @@ class EUser(
 
   @Id
   @GeneratedValue
-  open var id: Int? = null,
+  var id: Int? = null,
 ) : UserDetails {
-  override fun getAuthorities(): MutableCollection<out GrantedAuthority> = roles
+  override fun getAuthorities(): MutableCollection<out GrantedAuthority>? = roles
 
-  override fun getPassword(): String = password
+  override fun getPassword(): String? = password
 
-  override fun getUsername(): String = username
+  override fun getUsername(): String? = username
 
   override fun isAccountNonExpired(): Boolean = accountNonExpired
 

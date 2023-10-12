@@ -16,6 +16,7 @@ import com.hatshop_api.repositories.ShippingRepository
 import com.hatshop_api.repositories.TaxRepository
 import com.hatshop_api.security.models.EUser
 import com.hatshop_api.security.models.Role
+import com.hatshop_api.security.repositories.RoleRepository
 import com.hatshop_api.security.repositories.UserRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Configuration
@@ -33,6 +34,7 @@ class InitDb(
   val productRepository: ProductRepository,
   val shippingRepository: ShippingRepository,
   val taxRepository: TaxRepository,
+  val roleRepository: RoleRepository,
   val encoder: PasswordEncoder
 ) : CommandLineRunner {
 
@@ -532,6 +534,9 @@ class InitDb(
     val tax2 = Tax("No Tax", 0.00.toBigDecimal())
     taxRepository.saveAll(listOf(tax1, tax2))
 
+    val customerRole = roleRepository.save(Role("ROLE_CUSTOMER"))
+    val adminRole = roleRepository.save(Role("ROLE_ADMIN"))
+
     customerRepository.save(
       Customer(
         "customer1",
@@ -539,7 +544,7 @@ class InitDb(
         "customer1",
         "customer1@email.com",
         encoder.encode("password123"),
-        mutableSetOf(Role("ROLE_CUSTOMER")),
+        mutableSetOf(customerRole),
         shipR2
       )
     )
@@ -551,7 +556,7 @@ class InitDb(
         "admin1",
         "admin1@email.com",
         encoder.encode("password123"),
-        mutableSetOf(Role("ROLE_ADMIN"))
+        mutableSetOf(adminRole)
       )
     )
   }

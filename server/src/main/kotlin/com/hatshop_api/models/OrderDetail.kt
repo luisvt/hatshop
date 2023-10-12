@@ -6,6 +6,8 @@ import jakarta.persistence.Column
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.validation.constraints.Size
@@ -13,16 +15,19 @@ import java.math.BigDecimal
 
 @Entity
 class OrderDetail(
-  @EmbeddedId
-  @AttributeOverrides(
-    AttributeOverride(name = "orderId", column = Column(name = "order_id", nullable = false)),
-    AttributeOverride(name = "productId", column = Column(name = "product_id", nullable = false))
-  )
-  var id: OrderDetailId,
+//  @EmbeddedId
+//  @AttributeOverrides(
+//    AttributeOverride(name = "orderId", column = Column(name = "order_id", nullable = false)),
+//    AttributeOverride(name = "productId", column = Column(name = "product_id", nullable = false))
+//  )
+//  var id: OrderDetailId,
+  @Id
+  @GeneratedValue
+  var id: Int,
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(nullable = false, insertable = false, updatable = false)
-  var orders: EOrder,
+//  @ManyToOne(fetch = FetchType.LAZY)
+//  @JoinColumn(nullable = false, insertable = false, updatable = false)
+//  var orders: EOrder?,
 
   @Size(max = 50)
   @Column(nullable = false, length = 50)
