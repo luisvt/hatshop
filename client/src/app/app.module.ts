@@ -16,25 +16,31 @@ import { Router } from '@angular/router';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { GlobalsService } from './services/globals.service';
 import { XRequestWithInterceptor } from './interceptors/x-request-with.interceptor';
-import { MatxPromptModule } from 'matx-core';
+import {MatxNavTreeModule, MatxPromptModule} from 'matx-core';
+import {HttpBasicAuthInterceptor} from "./interceptors/http-basic-auth.interceptor";
+import {MatTreeModule} from "@angular/material/tree";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    NgxPermissionsModule.forRoot(),
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatxPromptModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        NgxPermissionsModule.forRoot(),
+        MatSidenavModule,
+        MatToolbarModule,
+        MatListModule,
+        MatIconModule,
+        MatSnackBarModule,
+        MatxPromptModule,
+        MatTreeModule,
+        MatButtonModule,
+        MatxNavTreeModule
+    ],
   providers: [
     CookieService,
     {
@@ -43,6 +49,7 @@ import { MatxPromptModule } from 'matx-core';
       multi: true,
       deps: [MatSnackBar, Router, GlobalsService]
     },
+    {provide: HTTP_INTERCEPTORS, useClass: HttpBasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: XRequestWithInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

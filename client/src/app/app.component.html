@@ -4,15 +4,9 @@
                [mode]="sideNavCtrl.isMobile ? 'over' : 'side'"
                [opened]="(!sideNavCtrl.isMobile || sideNavCtrl.opened)"
                (openedChange)="sideNavCtrl.opened = $event">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary">Hat Shop</mat-toolbar>
+    <matx-nav-tree [items]="appPages"></matx-nav-tree>
     <mat-nav-list>
-      <ng-template ngFor let-page [ngForOf]="appPages">
-        <a mat-list-item *ngxPermissionsOnly="page.permissions" [routerLink]="page.url" routerLinkActive="active"
-           (click)="sideNavCtrl.opened = false">
-          <mat-icon matListItemIcon>{{page.icon}}</mat-icon>
-          <h4 matListItemTitle>{{page.title}}</h4>
-        </a>
-      </ng-template>
       <mat-list-item *ngIf="!(loggedIn$ | async)" routerLink="/login" routerLinkActive="active"
                      (click)="sideNavCtrl.opened = false">
         <mat-icon matListItemIcon>exit_to_app</mat-icon>

@@ -22,7 +22,7 @@
     "@angular/router": "^16.2.0",
     "bootstrap-scss": "^5.3.2",
     "debounce-decorator-ts": "^1.0.4",
-    "matx-core": "^16.0.1",
+    "matx-core": "^16.0.2",
     "ngx-cookie-service": "^16.0.1",
     "ngx-permissions": "^16.0.1",
     "ngx-pipes": "^3.2.2",

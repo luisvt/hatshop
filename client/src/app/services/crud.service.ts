@@ -39,7 +39,7 @@ export abstract class CrudService<T extends { id?: number }> {
 
   save(item: T | any) {
     if (item.id) {
-      return this.http.put<T>(`${this.baseUrl}/${item.id}`, item);
+      return this.http.put<T>(this.baseUrl, item);
     } else {
       return this.http.post<T>(this.baseUrl, item);
     }

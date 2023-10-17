@@ -4,6 +4,17 @@
 
 .sidenav {
   width: 300px;
+
+  &::ng-deep > .mat-drawer-inner-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+matx-nav-tree {
+  flex-grow: 1;
+  height: 0;
+  overflow-y: auto;
 }
 
 .mat-toolbar.mat-primary {

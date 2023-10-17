@@ -42,12 +42,14 @@ export class AuthService {
   }
 
   async login(credentials: { username: string, password: string }) {
+    let authCredentials = btoa(credentials.username + ':' + credentials.password);
     return this.http.get<User>(
       environment.api + 'session-user', {
         params: {$expand: 'roles'},
-        headers: {authorization: 'Basic ' + btoa(credentials.username + ':' + credentials.password)}
+        headers: {authorization: 'Basic ' + authCredentials}
       }
     ).pipe(tap(currentUser => {
+      sessionStorage.setItem('authCredentials', authCredentials)
       sessionStorage.setItem('current_user', JSON.stringify(currentUser));
       this.globalsSvc.currentUser$.next(currentUser);
       this.router.navigateByUrl(this.redirectUrl || '/home');
@@ -55,8 +57,8 @@ export class AuthService {
   }
 
   async logout() {
-    const _csrf = this.cookieService.get('XSRF-TOKEN');
     await this.http.post(environment.api + 'logout', null).toPromise();
+    sessionStorage.clear();
     this.globalsSvc.currentUser$.next(null);
     this.router.navigateByUrl('/login', {replaceUrl: true});
   }

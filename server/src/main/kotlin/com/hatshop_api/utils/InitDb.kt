@@ -543,7 +543,7 @@ class InitDb(
         "customer1",
         "customer1",
         "customer1@email.com",
-        encoder.encode("password123"),
+        encoder.encode("78\\\$j;42IlJy"),
         mutableSetOf(customerRole),
         shipR2
       )
@@ -555,7 +555,7 @@ class InitDb(
         "One",
         "admin1",
         "admin1@email.com",
-        encoder.encode("password123"),
+        encoder.encode("78\\\$j;42IlJy"),
         mutableSetOf(adminRole)
       )
     )

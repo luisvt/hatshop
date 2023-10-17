@@ -29,13 +29,6 @@ class SecurityConfig(
   @Bean
   fun passwordEncoder() = BCryptPasswordEncoder()
 
-  fun configure(auth: AuthenticationManagerBuilder) {
-    LOGGER.debug("configuring AuthenticationManagerBuilder")
-    auth
-      .userDetailsService(userDetailsService)
-      .passwordEncoder(passwordEncoder())
-  }
-
   @Bean
   fun filterChain(http: HttpSecurity): SecurityFilterChain {
     LOGGER.debug("configuring HttpSecurity")

@@ -7,19 +7,19 @@ const routes: Routes = [
   {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
   {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
   {
-    path: 'departments',
+    path: 'settings/departments',
     loadChildren: () => import('./pages/departments/departments.module').then(m => m.DepartmentsModule),
     canActivate: [ngxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
   },
   {
-    path: 'categories',
+    path: 'settings/categories',
     loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule),
     canActivate: [ngxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
   },
   {
-    path: 'shipping-regions',
+    path: 'settings/shipping-regions',
     loadChildren: () => import('./pages/shipping-region/shipping-region.module').then(m => m.ShippingRegionModule),
     canActivate: [ngxPermissionsGuard],
     data: {permissions: {only: ['ADMIN'], redirectTo: 'home'}}
