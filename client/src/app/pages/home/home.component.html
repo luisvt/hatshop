@@ -1,8 +1,41 @@
 <mat-toolbar color="primary">
   <matx-menu-button></matx-menu-button>
-  <div class="col">Home</div>
+  <header class="row w-100">
+    <h1 class="col">Popular products</h1>
+    <div class="col-auto"><a href="#" target="_blank" mat-stroked-button>See all</a></div>
+  </header>
 </mat-toolbar>
 
 <div class="container pt-5">
-  Home Content
+    <article class="banner-wrap">
+      <img src="assets/images/banner.jpg" class="w-100 rounded">
+    </article>
+
+    <div class="row">
+      <div href="#" class="col-md-3 py-3" *ngFor="let product of popularProducts">
+        <mat-card class="example-card">
+          <mat-card-header>
+<!--            <div mat-card-avatar class="example-header-image"></div>-->
+            <mat-card-title><h2>{{product.name}}</h2></mat-card-title>
+<!--            <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+          </mat-card-header>
+          <img mat-card-image [src]="product.image" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <p>{{product.description}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>View</button>
+            <button mat-button>Add To Cart</button>
+          </mat-card-actions>
+        </mat-card>
+        <!--<mat-card>
+          <img mat-card-image [src]="product.image ?? ''" [alt]="product.name">
+          <mat-card-title class="text-truncate" [matTooltip]="product.name ?? ''">{{product.name}}</mat-card-title>
+          <mat-card-content>
+            <div>{{product.description}}</div>
+            <div class="mt-1">${{product.price}}</div>
+          </mat-card-content>
+        </mat-card>-->
+      </div>
+    </div>
 </div>

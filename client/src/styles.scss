@@ -43,3 +43,18 @@ $hatshop-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.toolbar-search-box {
+  .mat-mdc-text-field-wrapper {
+    background-color: transparent !important;
+    color: white !important;
+  }
+
+  mat-label, .mdc-text-field__input, .mdc-text-field__input::placeholder {
+    color: white !important;
+  }
+
+  .mdc-floating-label--float-above {
+    display: none;
+  }
+}
