@@ -29,11 +29,11 @@ export abstract class CrudService<T extends { id?: number }> {
   }
 
   find(params?: any) {
-    params = this.stringifyParams(params);
     return this.http.get<Page<T>>(this.baseUrl, {params});
   }
 
   findAll(params?: Params) {
+    params = this.stringifyParams(params);
     return this.http.get<T[]>(this.baseUrl, {params})
   }
 

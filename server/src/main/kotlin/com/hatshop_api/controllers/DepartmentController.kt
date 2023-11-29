@@ -7,22 +7,21 @@ import com.hatshop_api.repositories.ProductRepository
 import com.hatshop_api.utils.Constants.PAGE_NUMBER
 import com.hatshop_api.utils.Constants.PAGE_SIZE
 import com.lv_spring.data.rest.jpa.AbstractRestController
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.domain.PageRequest
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("departments")
+@Tag(name = "Departments")
 class DepartmentController(
   repository: DepartmentRepository,
   val productRepository: ProductRepository,
   val categoryRepository: CategoryRepository,
 ) : AbstractRestController<Department, Int>(repository) {
 
-  @RequestMapping("/{id}/products")
-  fun getDepartmentProducts(
+  @GetMapping("/{id}/products")
+  fun findAllProducts(
     @PathVariable id: Int,
     @RequestParam(defaultValue = PAGE_NUMBER) page: Int,
     @RequestParam(defaultValue = PAGE_SIZE) size: Int
@@ -32,8 +31,8 @@ class DepartmentController(
     else -> productRepository.findAllByCategoriesDepartmentId(id, PageRequest.of(page, size))
   }
 
-  @RequestMapping("/{id}/categories")
-  fun getDepartmentCategories(
+  @GetMapping("/{id}/categories")
+  fun findAllCategories(
     @PathVariable id: Int,
     @RequestParam(defaultValue = PAGE_NUMBER) page: Int,
     @RequestParam(defaultValue = PAGE_SIZE) size: Int

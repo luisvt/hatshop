@@ -537,6 +537,7 @@ class InitDb(
     val customerRole = roleRepository.save(Role("ROLE_CUSTOMER"))
     val adminRole = roleRepository.save(Role("ROLE_ADMIN"))
 
+    // 78\$j;42IlJy
     customerRepository.save(
       Customer(
         "customer1",

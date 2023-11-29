@@ -1,6 +1,7 @@
 package com.hatshop_api.security.models
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY
 import jakarta.persistence.CascadeType
@@ -41,9 +42,9 @@ class EUser(
   @Column(unique = true, nullable = false, length = 50)
   var email: String?,
 
+  @JsonIgnore
   @NotEmpty
   @Column(nullable = false, length = 100)
-  @JsonProperty(access = WRITE_ONLY)
   private var password: String?,
 
   @ManyToMany(fetch = FetchType.EAGER)

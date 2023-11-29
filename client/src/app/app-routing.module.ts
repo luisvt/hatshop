@@ -5,6 +5,8 @@ import { ngxPermissionsGuard } from 'ngx-permissions';
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
+  {path: 'departments/:departmentId/products', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
+  {path: 'departments/:departmentId/categories/:categoryId/products', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)},
   {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)},
   {
     path: 'settings/departments',

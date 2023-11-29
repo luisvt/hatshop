@@ -1,30 +1,32 @@
 <mat-toolbar color="primary">
   <matx-menu-button></matx-menu-button>
   <header class="row w-100">
-    <h1 class="col">Popular products</h1>
+    <h1 class="col d-flex align-items-center">
+      <span>Popular products</span></h1>
     <div class="col-auto"><a href="#" target="_blank" mat-stroked-button>See all</a></div>
   </header>
 </mat-toolbar>
 
-<div class="container pt-5">
+<main>
+  <div class="container pt-5">
     <article class="banner-wrap">
       <img src="assets/images/banner.jpg" class="w-100 rounded">
     </article>
 
     <div class="row">
-      <div href="#" class="col-md-3 py-3" *ngFor="let product of popularProducts">
-        <mat-card class="example-card">
+      <div class="col-md-3 py-3" *ngFor="let product of popularProducts">
+        <mat-card>
           <mat-card-header>
 <!--            <div mat-card-avatar class="example-header-image"></div>-->
             <mat-card-title><h2>{{product.name}}</h2></mat-card-title>
 <!--            <mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
           </mat-card-header>
-          <img mat-card-image [src]="product.image" alt="Photo of a Shiba Inu">
+          <img mat-card-image [src]="product.thumbnail" alt="Photo of a {{product.name}}">
           <mat-card-content>
             <p>{{product.description}}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button>View</button>
+            <a [routerLink]="'/products/' + product.id" mat-button>View</a>
             <button mat-button>Add To Cart</button>
           </mat-card-actions>
         </mat-card>
@@ -38,4 +40,6 @@
         </mat-card>-->
       </div>
     </div>
-</div>
+
+  </div>
+</main>

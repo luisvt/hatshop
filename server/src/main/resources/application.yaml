@@ -11,3 +11,5 @@ spring:
 logging.level:
   org.springframework.security.web.csrf: debug
   com.hatshop_api: debug
+  web: TRACE
+  com.lv_spring: DEBUG
