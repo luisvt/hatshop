@@ -1,0 +1,76 @@
+stages:
+#  - test
+  - build
+  - deploy_images
+
+variables:
+  SERVER_IMAGE: $CI_REGISTRY_IMAGE/hatshop_server:0.0.1
+  CLIENT_IMAGE: $CI_REGISTRY_IMAGE/hatshop_client:0.0.1
+  DOCKER_IMAGE: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:24.0.7
+  DOCKER_DIND_IMAGE: $DOCKER_IMAGE-dind
+  GRADLE_IMAGE: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/gradle:8.5.0-jdk21-alpine
+  NODE_IMAGE: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:21.4.0-alpine
+
+build_client:
+  stage: build
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:20
+  cache:
+    - key: 'client/dist/hatshop'
+      paths:
+        - client/dist/hatshop
+      policy: push
+    - key:
+        files:
+          - pnpm-lock.yaml
+      paths:
+        - .pnpm-store/
+  script:
+    - cd client
+    - command -v pnpm || npm i -g pnpm --cache .pnpm-store
+    - pnpm i --shamefully-hoist --store-dir .pnpm-store
+    - pnpm run build
+
+build_server:
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/gradle:8.5.0-jdk21-alpine
+  stage: build_server
+  dependencies:
+    - build_client
+  cache:
+    key:
+      files:
+        - server/gradle/wrapper/gradle-wrapper.properties
+    paths:
+      - server/.gradle-cache/caches
+      - server/.gradle-cache/notifications
+  script:
+    - cd server
+    - gradle --build-cache --gradle-user-home .gradle-cache build
+
+deploy_client_image:
+  image: $DOCKER_IMAGE
+  services:
+    - name: $DOCKER_DIND_IMAGE
+      alias: docker
+  stage: deploy_images
+  cache:
+    - key: 'client/dist/hatshop'
+      paths:
+        - client/dist/hatshop
+      policy: pull
+  script:
+    - cd client
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CLIENT_IMAGE .
+    - docker push $CLIENT_IMAGE
+
+deploy_server_image:
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/gradle:8.5.0-jdk21-alpine
+  stage: deploy_images
+  services:
+    - name: $DOCKER_DIND_IMAGE
+      alias: docker
+  script:
+    - cd server
+    - gradle bootBuildImage --imageName=$SERVER_IMAGE
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - docker push $SERVER_IMAGE

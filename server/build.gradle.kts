@@ -31,8 +31,8 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
 //  implementation("org.springframework.data:spring-data-rest-hal-explorer")
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-  implementation(project(":lv-spring-data-rest-jpa"))
-//  implementation("com.gitlab.lv_spring:lv-spring-data-rest-jpa:0.0.1-SNAPSHOT")
+//  implementation(project(":lv-spring-data-rest-jpa"))
+  implementation("com.gitlab.lv_spring:lv-spring-data-rest-jpa:0.0.1-SNAPSHOT")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
   implementation("com.github.tennaito:rsql-jpa:2.0.2")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -54,4 +54,9 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
   useJUnitPlatform()
+}
+
+tasks.bootBuildImage {
+  imageName = "hatshop-server"
+  version = "0.0.1"
 }
